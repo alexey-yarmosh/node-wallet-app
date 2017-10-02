@@ -6,6 +6,7 @@ const logger = require('../libs/logger');
 const errorHandler = require('../libs/error-handler');
 
 const getCardsController = require('./controllers/cards/get-cards');
+const addCardController = require('./controllers/cards/add-card');
 const deleteCardController = require('./controllers/cards/delete-card');
 const errorController = require('./controllers/error');
 const CardsModel = require('./models/cards');
@@ -13,6 +14,7 @@ const CardsModel = require('./models/cards');
 const app = new Koa();
 router.param('id', (id, ctx, next) => next());
 router.get('/cards/', getCardsController);
+router.post('/cards/', addCardController);
 router.delete('/cards/:id', deleteCardController);
 router.all('/error', errorController);
 

@@ -11,7 +11,7 @@ class Cards extends FileModel {
 		super('cards.json');
 	}
 
-	async create(card) {
+	async add(card) {
 		const isDataValid = card && card.hasOwnProperty('cardNumber') && card.hasOwnProperty('balance');
 		if (isDataValid) {
 			card.id = this._fileData.length + 1;
