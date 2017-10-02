@@ -10,18 +10,12 @@ class Cards extends FileModel {
 	constructor () {
 		super('cards.json');
 	}
- 
-	/**
-	 * Добавляет карту
-	 *
-	 * @param {Object} card описание карты
-	 * @returns {Object}
-	 */
-	async create (card) {
+
+	async create(card) {
 		const isDataValid = card && card.hasOwnProperty('cardNumber') && card.hasOwnProperty('balance');
 		if (isDataValid) {
-			card.id = this._dataSource.length + 1;
-			this._dataSource.push(card);
+			card.id = this._fileData.length + 1;
+			this._fileData.push(card);
 			await this._saveUpdates();
 			return card;
 		} else {
@@ -29,27 +23,17 @@ class Cards extends FileModel {
 		}
 	}
 
-	/**
-	 * Удалет карту
-	 * @param {Number} id идентификатор карты
-	 */
-	async remove (id ) {
-		const card = this._dataSource.find((item) => {
+	async delete(id) {
+		const card = this._fileData.find((item) => {
 			return item.id === id;
 		});
-
 		if (!card) {
 			throw new ApplicationError(`Card with ID=${id} not found`, 404);
 		}
-		const cardIndex = this._dataSource.indexOf(card);
-		this._dataSource.splice(cardIndex, 1);
+		const cardIndex = this._fileData.indexOf(card);
+		this._fileData.splice(cardIndex, 1);
 		await this._saveUpdates();
 	}
-
-	/**
-	 * Сохраняет изменения
-	 * @private
-	 */
 }
 
 module.exports = Cards;

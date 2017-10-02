@@ -3,20 +3,22 @@ const fs = require('fs');
 const Model = require('./Model');
 
 class FileModel extends Model {
-  constructor(sourceFileName) {
+  constructor(fileName) {
     super();
-    this._dataSourceFile = path.join(__dirname, '..', '..', 'data', sourceFileName);
-    this._dataSource = require(this._dataSourceFile);
+    this._filePath = path.join(__dirname, '..', '..', 'data', fileName);
+    this._fileData = require(this._filePath);
   }
 
   async getAll() {
-    return await this._dataSource;
+    return await this._fileData;
   }
 
   async _saveUpdates() {
-    return new Promise(resolve =>
-      fs.writeFileSync(this._dataSourceFile, JSON.stringify(this._dataSource, null, 4), resolve)
-    );
+    return new Promise((resolve, reject) => {
+      fs.writeFile(this._filePath, JSON.stringify(this._fileData, null, 2), resolve);
+    }).catch(() => {
+      throw new ApplicationError('Save model error', 500);
+    });
   }
 }
 
