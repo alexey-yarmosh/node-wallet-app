@@ -10,6 +10,7 @@ const addCardController = require('./controllers/cards/add-card');
 const deleteCardController = require('./controllers/cards/delete-card');
 const errorController = require('./controllers/error');
 const CardsModel = require('./models/cards');
+// const TransactionsModel = require('./models/transactions');
 
 const app = new Koa();
 router.param('id', (id, ctx, next) => next());
@@ -22,6 +23,7 @@ app.use(logger);
 app.use(errorHandler);
 app.use(async (ctx, next) => {
   ctx.cardsModel = new CardsModel();
+  // ctx.transactionsModel = new TransactionsModel();
   await next();
 });
 app.use(bodyParser);

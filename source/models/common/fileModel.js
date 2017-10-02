@@ -9,6 +9,10 @@ class FileModel extends Model {
     this._fileData = require(this._filePath);
   }
 
+  _generateId() {
+    return this._fileData.reduce((max, elem) => Math.max(max, elem.id), 0) + 1;
+  }
+
   async getAll() {
     return await this._fileData;
   }

@@ -14,7 +14,7 @@ class Cards extends FileModel {
 	async add(card) {
 		const isDataValid = card && card.hasOwnProperty('cardNumber') && card.hasOwnProperty('balance');
 		if (isDataValid) {
-			card.id = this._fileData.length + 1;
+			card.id = this._generateId();
 			this._fileData.push(card);
 			await this._saveUpdates();
 			return card;
