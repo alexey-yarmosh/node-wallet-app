@@ -24,6 +24,11 @@ class FileModel extends Model {
       throw new ApplicationError('Save model error', 500);
     });
   }
+
+  async get(id) {
+    const allItems = await this.getAll();
+    return allItems.find(item => item.id === id);
+  }
 }
 
 module.exports = FileModel;

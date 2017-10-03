@@ -10,19 +10,10 @@ class Cards extends FileModel {
 	}
 
 	async add(card) {
-		const isDataValid = (
-			card &&
-			card.hasOwnProperty('cardNumber') &&
-			card.hasOwnProperty('balance')
-		);
-		if (isDataValid) {
-			card.id = this._generateId();
-			this._fileData.push(card);
-			await this._saveUpdates();
-			return card;
-		} else {
-			throw new ApplicationError('Card data is invalid', 400);
-		}
+		card.id = this._generateId();
+		this._fileData.push(card);
+		await this._saveUpdates();
+		return card;
 	}
 
 	async delete(id) {
