@@ -1,5 +1,3 @@
-const CardsModel = require('source/models/cards');
-
 module.exports = async (ctx) => {
   const card = ctx.request.body;
   const newCard = await ctx.cardsModel.add(card);

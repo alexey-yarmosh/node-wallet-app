@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 
@@ -12,7 +10,11 @@ class Cards extends FileModel {
 	}
 
 	async add(card) {
-		const isDataValid = card && card.hasOwnProperty('cardNumber') && card.hasOwnProperty('balance');
+		const isDataValid = (
+			card &&
+			card.hasOwnProperty('cardNumber') &&
+			card.hasOwnProperty('balance')
+		);
 		if (isDataValid) {
 			card.id = this._generateId();
 			this._fileData.push(card);
