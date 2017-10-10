@@ -1,11 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-
-const ApplicationError = require('../../libs/application-error');
 const FileModel = require('./common/fileModel');
 
 class Transactions extends FileModel {
-  constructor () {
+  constructor() {
     super('transactions.json');
   }
 
