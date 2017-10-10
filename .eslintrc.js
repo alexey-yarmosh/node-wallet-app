@@ -2,7 +2,8 @@ module.exports = {
   "extends": "airbnb",
 
   "globals": {
-    "document": true
+    "document": true,
+    "alert": true
   },
 
   "rules": {
@@ -15,6 +16,9 @@ module.exports = {
     "max-len": [2, 120, 4, {"ignoreUrls": true}],
     "no-confusing-arrow": [2, {"allowParens": true}],
     "object-curly-spacing": [2, "never"],
+    "no-alert": 0,
+    "object-curly-spacing": [2, "always"],
+    "eol-last": 0,
 
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
