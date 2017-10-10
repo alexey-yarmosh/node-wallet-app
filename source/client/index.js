@@ -1,4 +1,5 @@
 import { helloHandler } from './handlers';
+import './styles.css';
 
 const component = () => {
   const content = 'Hello! Node School App';
