@@ -1,122 +1,32 @@
 [
-  {
-    "id": 1,
-    "cardNumber": "5106216010126757",
-    "balance": "700"
-  },
-  {
-    "id": 2,
-    "cardNumber": "5106216010126757",
-    "balance": "700"
-  },
-  {
-    "id": 3,
-    "cardNumber": "5106216010126757",
-    "balance": "700"
-  },
-  {
-    "id": 5,
-    "cardNumber": "5106216010126757",
-    "balance": "700"
-  },
-  {
-    "id": 6,
-    "cardNumber": "5106216010126757",
-    "balance": "700"
-  },
-  {
-    "id": 7,
-    "cardNumber": "5106216010126757",
-    "balance": "700"
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "1337",
-    "id": 8
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "1337",
-    "id": 9
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "1337",
-    "id": 10
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "1337",
-    "id": 11
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "1337",
-    "id": 14
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "1337",
-    "id": 15
-  },
-  {
-    "cardNumber": "5106216010126760",
-    "balance": "1004",
-    "id": 16
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 17
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 18
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 19
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 20
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 21
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 22
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 23
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 24
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 25
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 26
-  },
-  {
-    "cardNumber": "5106216010126757",
-    "balance": "228",
-    "id": 27
-  }
+	{
+		"id": 1,
+		"cardNumber": "546925000000000",
+		"balance": "231310"
+	},
+	{
+		"id": 2,
+		"cardNumber": "676230000000000",
+		"balance": "0"
+	},
+	{
+		"id": 3,
+		"cardNumber": "405870000000000",
+		"balance": "700"
+	},
+	{
+		"id": 4,
+		"cardNumber": "550064000000000",
+		"balance": "2"
+	},
+	{
+		"id": 5,
+		"cardNumber": "437784000000000",
+		"balance": "4545"
+	},
+	{
+		"id": 6,
+		"cardNumber": "676803000000000",
+		"balance": "120"
+	}
 ]
