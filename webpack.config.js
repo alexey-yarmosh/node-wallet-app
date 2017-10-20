@@ -1,8 +1,19 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const fs = require('fs');
+
+// function getExternals() {
+//   return fs.readdirSync('node_modules')
+//     .concat(['react-dom/server'])
+//     .filter((module) => module !== '.bin')
+//     .reduce((externals, module) => {
+//       externals[module] = `commonjs ${module}`;
+//       return externals;
+//     }, {});
+// }
 
 module.exports = {
-  entry: './source/client/index.js',
+  entry: './source/views/index.js',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
@@ -12,12 +23,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env']
-          }
-        }
+        loader: 'babel-loader'
       },
       {
         test: /\.js$/,

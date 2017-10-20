@@ -1,0 +1,7 @@
+{
+  "presets": ["env", "react"],
+  "plugins": [
+    "emotion",
+    ["import", {libraryName: "antd", style: "css"}]
+  ]
+}
