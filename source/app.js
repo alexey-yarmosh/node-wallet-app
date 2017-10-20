@@ -2,6 +2,7 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser')();
 const router = require('koa-router')();
 const serve = require('koa-static');
+const { renderToString } = require('react-dom/server');
 const logger = require('../libs/logger');
 const errorHandler = require('../libs/error-handler');
 
@@ -22,6 +23,25 @@ router.delete('/cards/:id', deleteCardController);
 router.get('/cards/:id/transactions', getTransactionsController);
 router.post('/cards/:id/transactions', addTransactionController);
 router.all('/error', errorController);
+
+router.get('/', (ctx) => {
+  const indexView = require('./views/bundle.server.js');
+  const indexViewHtml = renderToString(indexView());
+
+  ctx.body = `
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/public/favicon.ico">
+        <title>Hello, Node School App!</title>
+      </head>
+      <body>
+        <div id="root">${indexViewHtml}</div>
+        <script src="bundle.client.js"></script>
+      </body>
+  </html>
+  `;
+});
 
 app.use(logger);
 app.use(errorHandler);
