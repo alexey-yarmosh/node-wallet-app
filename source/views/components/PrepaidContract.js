@@ -180,7 +180,7 @@ class PrepaidContract extends Component {
 							name='sum'
 							value={this.state.sum}
 							onChange={(event) => this.onChangeInputValue(event)} />
-						<Currency>₽</Currency>
+						<Currency>$</Currency>
 					</InputField>
 					<Button
 						type='submit'

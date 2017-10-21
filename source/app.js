@@ -32,9 +32,10 @@ router.get('/', (ctx) => {
     <html>
       <head>
         <meta charset="utf-8">
-        <link rel="shortcut icon" href="/public/favicon.ico">
         <title>Hello, Node School App!</title>
-      </head>
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="styles.css">
+        </head>
       <body>
         <div id="root">${indexViewHtml}</div>
         <script src="bundle.client.js"></script>

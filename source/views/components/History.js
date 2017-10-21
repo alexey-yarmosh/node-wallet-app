@@ -111,7 +111,7 @@ const History = ({cardHistory}) => {
 							{historyItemDate.format('HH:mm')}
 						</HistoryItemTime>
 						<HistoryItemSum>
-							{`${item.sum} ₽`}
+							{`${item.sum} $`}
 						</HistoryItemSum>
 					</HistoryItem>
 				);

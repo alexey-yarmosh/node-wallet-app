@@ -26,7 +26,7 @@ const Header = ({activeCard}) => (
 	<HeaderLayout>
 		<Balance>
 			{`${activeCard.bankName}: `}
-			<BalanceSum>{`${activeCard.balance} ₽`}</BalanceSum>
+			<BalanceSum>{`${activeCard.balance} $`}</BalanceSum>
 		</Balance>
 		<UserInfo />
 	</HeaderLayout>

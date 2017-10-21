@@ -78,8 +78,8 @@ const MobilePaymentSuccess = ({transaction, repeatPayment}) => {
 		<MobilePaymentLayout>
 			<SuccessIcon />
 			<Header>МегаФон (Россия)</Header>
-			<Sum>{sum} ₽</Sum>
-			<CommissionTips>В том числе комиссия {commission} ₽</CommissionTips>
+			<Sum>{sum} $</Sum>
+			<CommissionTips>В том числе комиссия {commission} $</CommissionTips>
 			<Section>
 				<SectionLabel>Номер транзакции</SectionLabel>
 				<SectionValue>200580211311</SectionValue>

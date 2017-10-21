@@ -79,7 +79,7 @@ const PrepaidSuccess = ({transaction, repeatPayment}) => {
 				</Section>
 				<Section>
 					<SectionLabel>Сумма:</SectionLabel>
-					<SectionValue>{sum} ₽</SectionValue>
+					<SectionValue>{sum} $</SectionValue>
 				</Section>
 			</SectionGroup>
 			<RepeatPayment onClick={repeatPayment}>Отправить еще один перевод</RepeatPayment>
