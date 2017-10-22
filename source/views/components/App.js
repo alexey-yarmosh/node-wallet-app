@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'react-emotion';
-import {injectGlobal} from 'emotion';
+import { injectGlobal } from 'emotion';
 import CardInfo from 'card-info';
 import {
 	CardsBar,
@@ -13,8 +13,8 @@ import {
 
 import './fonts.css';
 
-import cardsData from '../../data/cards';
-import transactionsData from '../../data/transactions';
+import cardsData from '../../data/cards.json';
+import transactionsData from '../../data/transactions.json';
 
 injectGlobal`
 	html,
@@ -114,7 +114,7 @@ class App extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const {cardsList, activeCardIndex, cardHistory} = this.state;
+		const { cardsList, activeCardIndex, cardHistory } = this.state;
 		const activeCard = cardsList[activeCardIndex];
 
 		const inactiveCardsList = cardsList.filter((card, index) => index === activeCardIndex ? false : card);

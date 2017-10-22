@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-import {Card, Title, Button, Island, Input} from './';
+import { Card, Title, Button, Island, Input } from './';
 
 const WithdrawTitle = styled(Title)`
 	text-align: center;
@@ -60,7 +60,7 @@ class Withdraw extends Component {
 			return;
 		}
 
-		const {name, value} = event.target;
+		const { name, value } = event.target;
 
 		this.setState({
 			[name]: value
@@ -76,14 +76,14 @@ class Withdraw extends Component {
 			event.preventDefault();
 		}
 
-		const {sum} = this.state;
+		const { sum } = this.state;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
 		}
 
-		this.setState({sum: 0});
+		this.setState({ sum: 0 });
 	}
 
 	/**
@@ -91,7 +91,7 @@ class Withdraw extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const {inactiveCardsList} = this.props;
+		const { inactiveCardsList } = this.props;
 
 		return (
 			<form onSubmit={(event) => this.onSubmitForm(event)}>

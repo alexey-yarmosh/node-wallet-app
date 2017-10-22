@@ -1,15 +1,13 @@
 module.exports = {
   "extends": "airbnb",
-
-  "globals": {
-    "document": true,
-    "alert": true
-  },
-
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
-
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
   "rules": {
     "strict": 0,
     "comma-dangle": 0,
