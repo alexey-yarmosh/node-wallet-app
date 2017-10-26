@@ -4,7 +4,7 @@ const router = require('koa-router')();
 const serve = require('koa-static');
 const path = require('path');
 const { renderToStaticMarkup } = require('react-dom/server');
-const logger = require('../libs/logger');
+const logger = require('../libs/logger')('wallet-app');
 const errorHandler = require('../libs/error-handler');
 
 const getCardsController = require('./controllers/cards/get-cards');
@@ -33,11 +33,16 @@ function getView(viewId) {
 router.get('/', (ctx) => {
 	const indexView = getView('bundle');
 	const indexViewHtml = renderToStaticMarkup(indexView());
-
 	ctx.body = indexViewHtml;
 });
 
-app.use(logger);
+// Getting resources speed
+app.use(async (ctx, next) => {
+	const start = new Date();
+	await next();
+	const ms = new Date() - start;
+	logger.log('info', `${ctx.method} ${ctx.url} - ${ms}ms`);
+});
 app.use(errorHandler);
 app.use(async (ctx, next) => {
   ctx.cardsModel = new CardsModel();
@@ -49,5 +54,5 @@ app.use(router.routes());
 app.use(serve('./public'));
 
 app.listen(3000, () => {
-	console.log('Application started');
+	logger.log('info', 'Application started');
 });
