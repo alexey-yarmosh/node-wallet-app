@@ -7,6 +7,7 @@
     "build": "webpack",
     "lint": "./node_modules/.bin/eslint .",
     "start": "NODE_PATH=. nodemon source/app.js -L",
+    "debug": "NODE_PATH=. node --inspect-brk source/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
