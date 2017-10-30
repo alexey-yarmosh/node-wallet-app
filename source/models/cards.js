@@ -27,6 +27,17 @@ class Cards extends FileModel {
     this._fileData.splice(cardIndex, 1);
     await this._saveUpdates();
   }
+
+  async pay(id, sum) {
+    const card = this._fileData.find((item) => {
+      return item.id === id;
+    });
+    if (!card) {
+      throw new ApplicationError(`Card with ID=${id} not found`, 404);
+    }
+    card.balance -= sum;
+    await this._saveUpdates();
+  }
 }
 
 module.exports = Cards;
