@@ -5,7 +5,8 @@ module.exports = async ctx => {
     await ctx.cardsModel.pay(id, sum);
     
     const transaction = {
-        "type": "prepaidCard",
+        "type": "paymentMobile",
+        "data": "+7(921)3333333",
         "cardId": id,
         sum,
         "cardNumber": "546925000000000"

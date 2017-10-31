@@ -181,5 +181,38 @@
     "cardNumber": "546925000000000",
     "id": 25,
     "time": "2017-10-30T21:10:02.629Z"
+  },
+  {
+    "type": "prepaidCard",
+    "cardId": 3,
+    "sum": 100,
+    "cardNumber": "546925000000000",
+    "id": 26,
+    "time": "2017-10-31T14:02:23.647Z"
+  },
+  {
+    "type": "prepaidCard",
+    "cardId": 3,
+    "sum": 100,
+    "cardNumber": "546925000000000",
+    "id": 27,
+    "time": "2017-10-31T14:02:30.303Z"
+  },
+  {
+    "type": "prepaidCard",
+    "cardId": 3,
+    "sum": 100,
+    "cardNumber": "546925000000000",
+    "id": 28,
+    "time": "2017-10-31T14:02:49.301Z"
+  },
+  {
+    "type": "paymentMobile",
+    "data": "+7(921)3333333",
+    "cardId": 3,
+    "sum": 100,
+    "cardNumber": "546925000000000",
+    "id": 29,
+    "time": "2017-10-31T14:10:52.660Z"
   }
 ]
