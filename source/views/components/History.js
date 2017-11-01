@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import moment from 'moment';
 
-import {Island} from './';
+import { Island } from './';
 
 const HistoryLayout = styled(Island)`
 	width: 530px;
@@ -43,7 +43,7 @@ const HistoryItemIcon = styled.div`
 	height: 50px;
 	border-radius: 25px;
 	background-color: #159761;
-	background-image: url(${({bankSmLogoUrl}) => bankSmLogoUrl});
+	background-image: url(${({ bankSmLogoUrl }) => bankSmLogoUrl});
 	background-size: contain;
 	background-repeat: no-repeat;
 `;
@@ -64,8 +64,8 @@ const HistoryItemSum = styled.div`
 	text-overflow: ellipsis;
 `;
 
-const History = ({cardHistory}) => {
-	const getHistoryItemTitle = (item) => {
+const History = ({ cardHistory }) => {
+	const getHistoryItemTitle = item => {
 		let typeTitle = '';
 
 		switch (item.type) {
@@ -103,7 +103,7 @@ const History = ({cardHistory}) => {
 
 				return (
 					<HistoryItem key={index}>
-						<HistoryItemIcon bankSmLogoUrl={item.card.theme.bankSmLogoUrl}/>
+						<HistoryItemIcon bankSmLogoUrl={item.card.theme.bankSmLogoUrl} />
 						<HistoryItemTitle>
 							{getHistoryItemTitle(item)}
 						</HistoryItemTitle>

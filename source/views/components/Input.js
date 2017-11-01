@@ -12,10 +12,10 @@ const StyledInput = styled.input`
 	background-color: rgba(0, 0, 0, 0.2);
 	font-size: 15px;
 	line-height: 1.5;
-	color: ${({textColor}) => textColor || '#fff'};
+	color: ${({ textColor }) => textColor || '#fff'};
 `;
 
-const Input = (props) => (
+const Input = props => (
 	<StyledInput textColor={props.textColor} className={props.className} {...props} />
 );
 

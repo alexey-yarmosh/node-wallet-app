@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import MobilePaymentContract from './MobilePaymentContract';
@@ -15,7 +15,7 @@ class MobilePayment extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {stage: 'contract'};
+		this.state = { stage: 'contract' };
 	}
 
 	/**
@@ -33,7 +33,7 @@ class MobilePayment extends Component {
 	 * Повторить платеж
 	 */
 	repeatPayment() {
-		this.setState({stage: 'contract'});
+		this.setState({ stage: 'contract' });
 	}
 
 	/**
@@ -43,21 +43,23 @@ class MobilePayment extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const {activeCard} = this.props;
+		const { activeCard } = this.props;
 
 		if (this.state.stage === 'success') {
 			return (
 				<MobilePaymentSuccess
 					activeCard={activeCard}
 					transaction={this.state.transaction}
-					repeatPayment={() => this.repeatPayment()} />
+					repeatPayment={() => this.repeatPayment()}
+				/>
 			);
 		}
 
 		return (
 			<MobilePaymentContract
 				activeCard={activeCard}
-				onPaymentSuccess={(transaction) => this.onPaymentSuccess(transaction)} />
+				onPaymentSuccess={transaction => this.onPaymentSuccess(transaction)}
+			/>
 		);
 	}
 }

@@ -32,7 +32,7 @@ function getView(viewId) {
 	return require(viewPath);
 }
 
-router.get('/', (ctx) => {
+router.get('/', ctx => {
 	const indexView = getView('bundle');
 	const indexViewHtml = renderToStaticMarkup(indexView());
 	ctx.body = indexViewHtml;

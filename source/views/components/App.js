@@ -57,9 +57,9 @@ class App extends Component {
 		super();
 
 		const cardsList = this.prepareCardsData(cardsData);
-		const cardHistory = transactionsData.map((data) => {
-			const card = cardsList.find((card) => card.id === data.cardId);
-			return card ? Object.assign({}, data, {card}) : data;
+		const cardHistory = transactionsData.map(data => {
+			const card = cardsList.find(card => card.id === data.cardId);
+			return card ? Object.assign({}, data, { card }) : data;
 		});
 
 		this.state = {
@@ -76,7 +76,7 @@ class App extends Component {
 	 * @returns {Object[]}
 	 */
 	prepareCardsData(cardsData) {
-		return cardsData.map((card) => {
+		return cardsData.map(card => {
 			const cardInfo = new CardInfo(card.cardNumber, {
 				banksLogosPath: '/assets/',
 				brandsLogosPath: '/assets/'
@@ -104,7 +104,7 @@ class App extends Component {
 	 * @param {Number} activeCardIndex индекс выбранной карты
 	 */
 	onCardChange(activeCardIndex) {
-		this.setState({activeCardIndex});
+		this.setState({ activeCardIndex });
 	}
 
 	/**
@@ -117,15 +117,16 @@ class App extends Component {
 		const { cardsList, activeCardIndex, cardHistory } = this.state;
 		const activeCard = cardsList[activeCardIndex];
 
-		const inactiveCardsList = cardsList.filter((card, index) => index === activeCardIndex ? false : card);
-		const filteredHistory = cardHistory.filter((data) => data.cardId === activeCard.id);
+		const inactiveCardsList = cardsList.filter((card, index) => (index === activeCardIndex ? false : card));
+		const filteredHistory = cardHistory.filter(data => data.cardId === activeCard.id);
 
 		return (
 			<Wallet>
 				<CardsBar
 					activeCardIndex={activeCardIndex}
 					cardsList={cardsList}
-					onCardChange={(activeCardIndex) => this.onCardChange(activeCardIndex)} />
+					onCardChange={activeCardIndex => this.onCardChange(activeCardIndex)}
+				/>
 				<CardPane>
 					<Header activeCard={activeCard} />
 					<Workspace>
@@ -133,7 +134,7 @@ class App extends Component {
 						<Prepaid
 							activeCard={activeCard}
 							inactiveCardsList={inactiveCardsList}
-							onCardChange={(newActiveCardIndex) => this.onCardChange(newActiveCardIndex)}
+							onCardChange={newActiveCardIndex => this.onCardChange(newActiveCardIndex)}
 						/>
 						<MobilePayment activeCard={activeCard} />
 						<Withdraw

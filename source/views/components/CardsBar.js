@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import {Card} from './';
+import { Card } from './';
 
 const Layout = styled.div`
 	display: flex;
@@ -36,8 +36,8 @@ const Footer = styled.footer`
 	font-size: 15px;
 `;
 
-const CardsBar = ({activeCardIndex, cardsList, onCardChange}) => {
-	const onCardClick = (activeCardIndex) => {
+const CardsBar = ({ activeCardIndex, cardsList, onCardChange }) => {
+	const onCardClick = activeCardIndex => {
 		onCardChange && onCardChange(activeCardIndex);
 	};
 
@@ -51,7 +51,8 @@ const CardsBar = ({activeCardIndex, cardsList, onCardChange}) => {
 						key={index}
 						data={card}
 						active={index === activeCardIndex}
-						onClick={() => onCardClick(index)} />
+						onClick={() => onCardClick(index)}
+					/>
 				))}
 				<Card type='new' />
 			</CardsList>

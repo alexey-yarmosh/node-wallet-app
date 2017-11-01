@@ -5,7 +5,7 @@ module.exports = {
     'node': true
   },
   'parserOptions': {
-    'ecmaVersion': 6,
+    'ecmaVersion': 2017,
     'sourceType': 'module'
   },
   'rules': {
@@ -23,6 +23,7 @@ module.exports = {
     'linebreak-style': 0,
     'no-else-return': 0,
     'arrow-parens': ['error', 'as-needed'],
+    'no-param-reassign': 0,
 
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
@@ -33,7 +34,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, {'extensions': ['.js', '.jsx']}],
     'react/jsx-indent': 0,
     'react/jsx-indent-props': 0,
-    'react/jsx-closing-bracket-location': [1, 'after-props'],
+    'react/jsx-closing-bracket-location': [1, 'tag-aligned'],
     'react/require-default-props': 0,
     'react/no-array-index-key': 0
   }

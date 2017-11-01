@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-import {Island, Title} from './';
+import { Island, Title } from './';
 
 const PrepaidLayout = styled(Island)`
 	width: 350px;
@@ -61,8 +61,8 @@ const RepeatPayment = styled.button`
 	text-transform: uppercase;
 `;
 
-const PrepaidSuccess = ({transaction, repeatPayment}) => {
-	const {sum, number} = transaction;
+const PrepaidSuccess = ({ transaction, repeatPayment }) => {
+	const { sum, number } = transaction;
 
 	return (
 		<PrepaidLayout>

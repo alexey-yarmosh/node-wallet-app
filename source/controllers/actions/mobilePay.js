@@ -3,13 +3,13 @@ module.exports = async ctx => {
     const sum = Number(ctx.request.body.amount);
 
     await ctx.cardsModel.pay(id, sum);
-    
+
     const transaction = {
-        "type": "paymentMobile",
-        "data": "+7(921)3333333",
-        "cardId": id,
+        type: 'paymentMobile',
+        data: '+7(921)3333333',
+        cardId: id,
         sum,
-        "cardNumber": "546925000000000"
+        cardNumber: '546925000000000'
     };
 
     const newTransaction = await ctx.transactionsModel.add(transaction);

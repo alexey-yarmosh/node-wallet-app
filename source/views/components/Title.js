@@ -9,7 +9,7 @@ const StyledTitle = styled.h2`
 	color: #000;
 `;
 
-const Title = ({children, className}) => (
+const Title = ({ children, className }) => (
 	<StyledTitle className={className}>
 		{children}
 	</StyledTitle>

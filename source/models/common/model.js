@@ -1,11 +1,11 @@
 class Model {
-  async get(id) {};
+  async get(id) {}
 
-  async getAll() {};
+  async getAll() {}
 
-  async create(data) {};
+  async create(data) {}
 
-  async remove(id) {};
+  async remove(id) {}
 }
 
 module.exports = Model;

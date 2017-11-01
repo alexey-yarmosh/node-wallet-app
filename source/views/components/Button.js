@@ -10,17 +10,19 @@ const StyledButton = styled.button`
 	border: none;
 	border-radius: 3px;
 	cursor: pointer;
-	background-color: ${({bgColor}) => bgColor || 'rgba(0, 0, 0, 0.05)'};
-	color: ${({textColor}) => textColor || 'rgba(0, 0, 0, 0.65)'};
+	background-color: ${({ bgColor }) => bgColor || 'rgba(0, 0, 0, 0.05)'};
+	color: ${({ textColor }) => textColor || 'rgba(0, 0, 0, 0.65)'};
 
 	&:focus,
 	&:hover {
-		color: ${({textColor}) => textColor || 'rgba(0, 0, 0, 0.65)'};
-		background-color: ${({bgColor}) => bgColor || 'rgba(0, 0, 0, 0.05)'};
+		color: ${({ textColor }) => textColor || 'rgba(0, 0, 0, 0.65)'};
+		background-color: ${({ bgColor }) => bgColor || 'rgba(0, 0, 0, 0.05)'};
 	}
 `;
 
-const Button = ({bgColor, textColor, children, className}) => (
+const Button = ({
+ bgColor, textColor, children, className
+}) => (
 	<StyledButton bgColor={bgColor} textColor={textColor} className={className}>
 		{children}
 	</StyledButton>

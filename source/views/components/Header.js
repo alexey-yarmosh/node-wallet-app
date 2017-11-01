@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import {Title, UserInfo} from './';
+import { Title, UserInfo } from './';
 
 const HeaderLayout = styled.header`
 	display: flex;
@@ -22,7 +22,7 @@ const BalanceSum = styled.span`
 	font-weight: bold;
 `;
 
-const Header = ({activeCard}) => (
+const Header = ({ activeCard }) => (
 	<HeaderLayout>
 		<Balance>
 			{`${activeCard.bankName}: `}

@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import {Select} from './';
+import { Select } from './';
 
 const CardLayout = styled.div`
 	position: relative;
@@ -11,32 +11,32 @@ const CardLayout = styled.div`
 	margin-bottom: 15px;
 	padding: 25px 20px 20px 25px;
 	border-radius: 4px;
-	background-color: ${({bgColor, active}) => active ? bgColor : 'rgba(255, 255, 255, 0.1)'};
+	background-color: ${({ bgColor, active }) => (active ? bgColor : 'rgba(255, 255, 255, 0.1)')};
 `;
 
 const CardLogo = styled.div`
 	height: 28px;
 	margin-bottom: 25px;
-	background-image: url(${({url}) => url});
+	background-image: url(${({ url }) => url});
 	background-size: contain;
 	background-repeat: no-repeat;
-	filter: ${({active}) => active ? 'none' : 'grayscale(100%) opacity(60%)'};
+	filter: ${({ active }) => (active ? 'none' : 'grayscale(100%) opacity(60%)')};
 `;
 
 const CardNumber = styled.div`
 	margin-bottom: 20px;
-	color: ${({active, textColor}) => active ? textColor : 'rgba(255, 255, 255, 0.6)'};
+	color: ${({ active, textColor }) => (active ? textColor : 'rgba(255, 255, 255, 0.6)')};
 	font-size: 16px;
 	font-family: 'OCR A Std Regular';
 `;
 
 const CardType = styled.div`
 	height: 26px;
-	background-image: url(${({url}) => url});
+	background-image: url(${({ url }) => url});
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position-x: right;
-	opacity: ${({active}) => active ? '1' : '0.6'};
+	opacity: ${({ active }) => (active ? '1' : '0.6')};
 `;
 
 const NewCardLayout = styled(CardLayout)`
@@ -76,7 +76,7 @@ class Card extends Component {
 	 * @param {Number} activeCardIndex индекс выбранной карты
 	 */
 	onCardChange(activeCardIndex) {
-		this.setState({activeCardIndex});
+		this.setState({ activeCardIndex });
 	}
 
 	/**
@@ -86,7 +86,9 @@ class Card extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const {data, type, active, onClick} = this.props;
+		const {
+ data, type, active, onClick
+} = this.props;
 
 		if (type === 'new') {
 			return (
@@ -95,25 +97,27 @@ class Card extends Component {
 		}
 
 		if (type === 'select') {
-			const {activeCardIndex} = this.state;
+			const { activeCardIndex } = this.state;
 			const selectedCard = data[activeCardIndex];
-			const {bgColor, bankLogoUrl, brandLogoUrl} = selectedCard.theme;
+			const { bgColor, bankLogoUrl, brandLogoUrl } = selectedCard.theme;
 
 			return (
-				<CardLayout active={true} bgColor={bgColor}>
-					<CardLogo url={bankLogoUrl} active={true} />
-					<CardSelect defaultValue='0' onChange={(activeCardIndex) => this.onCardChange(activeCardIndex)}>
+				<CardLayout active bgColor={bgColor}>
+					<CardLogo url={bankLogoUrl} active />
+					<CardSelect defaultValue='0' onChange={activeCardIndex => this.onCardChange(activeCardIndex)}>
 						{data.map((card, index) => (
 							<Select.Option key={index} value={`${index}`}>{card.number}</Select.Option>
 						))}
 					</CardSelect>
-					<CardType url={brandLogoUrl} active={true} />
+					<CardType url={brandLogoUrl} active />
 				</CardLayout>
 			);
 		}
 
-		const {number, theme} = data;
-		const {bgColor, textColor, bankLogoUrl, brandLogoUrl} = theme;
+		const { number, theme } = data;
+		const {
+ bgColor, textColor, bankLogoUrl, brandLogoUrl
+} = theme;
 		const themedBrandLogoUrl = active ? brandLogoUrl : brandLogoUrl.replace(/-colored.svg$/, '-white.svg');
 
 		return (

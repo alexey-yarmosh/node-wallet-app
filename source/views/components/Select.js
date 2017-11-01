@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'react-emotion';
-import {Select as AntdSelect} from 'antd';
+import { Select as AntdSelect } from 'antd';
 
 const StyledSelect = styled(AntdSelect)`
 	&.ant-select {
@@ -9,7 +9,7 @@ const StyledSelect = styled(AntdSelect)`
 			background-color: rgba(0, 0, 0, 0.08);
 			border: 1px solid rgba(0, 0, 0, 0.04);
 			border-radius: 3px;
-			color: ${({textColor}) => textColor || '#fff'};
+			color: ${({ textColor }) => textColor || '#fff'};
 
 			&:focus,
 			&:hover {
@@ -28,7 +28,7 @@ const StyledSelect = styled(AntdSelect)`
 	}
 `;
 
-const Select = (props) => (
+const Select = props => (
 	<StyledSelect {...props} />
 );
 

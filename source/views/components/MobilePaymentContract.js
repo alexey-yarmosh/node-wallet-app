@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-import {Island, Title, Button, Input} from './';
+import { Island, Title, Button, Input } from './';
 
 const MobilePaymentLayout = styled(Island)`
 	width: 440px;
@@ -89,7 +89,7 @@ class MobilePaymentContract extends Component {
 	 * @returns {Number}
 	 */
 	getSumWithCommission() {
-		const {sum, commission} = this.state;
+		const { sum, commission } = this.state;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
@@ -108,14 +108,14 @@ class MobilePaymentContract extends Component {
 			event.preventDefault();
 		}
 
-		const {sum, phoneNumber, commission} = this.state;
+		const { sum, phoneNumber, commission } = this.state;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum === 0) {
 			return;
 		}
 
-		this.props.onPaymentSuccess({sum, phoneNumber, commission});
+		this.props.onPaymentSuccess({ sum, phoneNumber, commission });
 	}
 
 	/**
@@ -127,7 +127,7 @@ class MobilePaymentContract extends Component {
 			return;
 		}
 
-		const {name, value} = event.target;
+		const { name, value } = event.target;
 
 		this.setState({
 			[name]: value
@@ -141,25 +141,27 @@ class MobilePaymentContract extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const {commission} = this.state;
+		const { commission } = this.state;
 
 		return (
 			<MobilePaymentLayout>
-				<form onSubmit={(event) => this.handleSubmit(event)}>
+				<form onSubmit={event => this.handleSubmit(event)}>
 					<MobilePaymentTitle>Пополнить телефон</MobilePaymentTitle>
 					<InputField>
 						<Label>Телефон</Label>
 						<InputPhoneNumber
 							name='phoneNumber'
 							value={this.state.phoneNumber}
-							readOnly='true' />
+							readOnly='true'
+						/>
 					</InputField>
 					<InputField>
 						<Label>Сумма</Label>
 						<InputSum
 							name='sum'
 							value={this.state.sum}
-							onChange={(event) => this.handleInputChange(event)} />
+							onChange={event => this.handleInputChange(event)}
+						/>
 						<Currency>$</Currency>
 					</InputField>
 					<InputField>

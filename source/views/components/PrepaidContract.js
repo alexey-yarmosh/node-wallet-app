@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-import {Island, Title, Button, Input} from './';
+import { Island, Title, Button, Input } from './';
 
 const PrepaidLayout = styled(Island)`
 	width: 350px;
@@ -27,7 +27,7 @@ const PrepaidItem = styled.div`
 	align-items: center;
 	border-radius: 3px;
 	cursor: pointer;
-	background-color: ${({selected, bgColor}) => selected ? bgColor : 'rgba(0, 0, 0, 0.05)'};
+	background-color: ${({ selected, bgColor }) => (selected ? bgColor : 'rgba(0, 0, 0, 0.05)')};
 `;
 
 const PrepaidItemIcon = styled.div`
@@ -35,19 +35,19 @@ const PrepaidItemIcon = styled.div`
 	height: 42px;
 	margin: 18px;
 	border-radius: 21px;
-	background-image: url(${({bankSmLogoUrl}) => bankSmLogoUrl});
+	background-image: url(${({ bankSmLogoUrl }) => bankSmLogoUrl});
 	background-size: contain;
 	background-repeat: no-repeat;
-	filter: ${({selected}) => selected ? 'none' : 'grayscale(100%)'};
+	filter: ${({ selected }) => (selected ? 'none' : 'grayscale(100%)')};
 `;
 
 const PrepaidItemTitle = styled.div`
 	font-size: 13px;
-	color: ${({selected, textColor}) => selected ? textColor : 'rgba(255, 255, 255, 0.6)'};
+	color: ${({ selected, textColor }) => (selected ? textColor : 'rgba(255, 255, 255, 0.6)')};
 `;
 
 const PrepaidItemDescription = styled.div`
-	color: ${({selected, textColor}) => selected ? textColor : 'rgba(255, 255, 255, 0.4)'};
+	color: ${({ selected, textColor }) => (selected ? textColor : 'rgba(255, 255, 255, 0.4)')};
 `;
 
 const InputField = styled.div`
@@ -92,7 +92,7 @@ class PrepaidContract extends Component {
 	 * @param {Number} activeCardIndex индекс активной карты
 	 */
 	onCardChange(activeCardIndex) {
-		this.setState({activeCardIndex});
+		this.setState({ activeCardIndex });
 	}
 
 	/**
@@ -104,7 +104,7 @@ class PrepaidContract extends Component {
 			return;
 		}
 
-		const {name, value} = event.target;
+		const { name, value } = event.target;
 
 		this.setState({
 			[name]: value
@@ -120,8 +120,8 @@ class PrepaidContract extends Component {
 			event.preventDefault();
 		}
 
-		const {sum} = this.state;
-		const {activeCard} = this.props;
+		const { sum } = this.state;
+		const { activeCard } = this.props;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
@@ -139,13 +139,13 @@ class PrepaidContract extends Component {
 	 * @returns {XML}
 	 */
 	render() {
-		const {inactiveCardsList} = this.props;
+		const { inactiveCardsList } = this.props;
 
-		const {activeCardIndex} = this.state;
+		const { activeCardIndex } = this.state;
 		const selectedCard = inactiveCardsList[activeCardIndex];
 
 		return (
-			<form onSubmit={(event) => this.onSubmitForm(event)}>
+			<form onSubmit={event => this.onSubmitForm(event)}>
 				<PrepaidLayout>
 					<PrepaidTitle>Пополнить карту</PrepaidTitle>
 
@@ -156,17 +156,21 @@ class PrepaidContract extends Component {
 									bgColor={card.theme.bgColor}
 									key={card.id}
 									onClick={() => this.onCardChange(index)}
-									selected={activeCardIndex === index}>
+									selected={activeCardIndex === index}
+								>
 									<PrepaidItemIcon
 										bankSmLogoUrl={card.theme.bankSmLogoUrl}
-										selected={activeCardIndex === index} />
+										selected={activeCardIndex === index}
+									/>
 									<PrepaidItemTitle
 										textColor={card.theme.textColor}
-										selected={activeCardIndex === index}>
+										selected={activeCardIndex === index}
+									>
 										C банковской карты
 										<PrepaidItemDescription
 											textColor={card.theme.textColor}
-											selected={activeCardIndex === index}>
+											selected={activeCardIndex === index}
+										>
 											{card.number}
 										</PrepaidItemDescription>
 									</PrepaidItemTitle>
@@ -179,13 +183,15 @@ class PrepaidContract extends Component {
 						<SumInput
 							name='sum'
 							value={this.state.sum}
-							onChange={(event) => this.onChangeInputValue(event)} />
+							onChange={event => this.onChangeInputValue(event)}
+						/>
 						<Currency>$</Currency>
 					</InputField>
 					<Button
 						type='submit'
 						bgColor={selectedCard.theme.bgColor}
-						textColor={selectedCard.theme.textColor}>
+						textColor={selectedCard.theme.textColor}
+					>
 						Пополнить
 					</Button>
 				</PrepaidLayout>

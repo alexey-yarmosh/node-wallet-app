@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-import {Island} from './';
+import { Island } from './';
 
 const MobilePaymentLayout = styled(Island)`
 	width: 440px;
@@ -71,8 +71,8 @@ const RepeatPayment = styled.button`
 	text-transform: uppercase;
 `;
 
-const MobilePaymentSuccess = ({transaction, repeatPayment}) => {
-	const {sum, phoneNumber, commission} = transaction;
+const MobilePaymentSuccess = ({ transaction, repeatPayment }) => {
+	const { sum, phoneNumber, commission } = transaction;
 
 	return (
 		<MobilePaymentLayout>

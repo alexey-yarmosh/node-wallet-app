@@ -5,7 +5,7 @@ const ApplicationError = require('../../libs/application-error');
 const FileModel = require('./common/fileModel');
 
 class Cards extends FileModel {
-  constructor () {
+  constructor() {
     super('cards.json');
   }
 
@@ -17,9 +17,7 @@ class Cards extends FileModel {
   }
 
   async delete(id) {
-    const card = this._fileData.find((item) => {
-      return item.id === id;
-    });
+    const card = this._fileData.find(item => item.id === id);
     if (!card) {
       throw new ApplicationError(`Card with ID=${id} not found`, 404);
     }
@@ -29,9 +27,7 @@ class Cards extends FileModel {
   }
 
   async pay(id, sum) {
-    const card = this._fileData.find((item) => {
-      return item.id === id;
-    });
+    const card = this._fileData.find(item => item.id === id);
     if (!card) {
       throw new ApplicationError(`Card with ID=${id} not found`, 404);
     }
