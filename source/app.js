@@ -13,7 +13,6 @@ const deleteCardController = require('./controllers/cards/delete-card');
 const getTransactionsController = require('./controllers/transactions/get-transactions');
 const addTransactionController = require('./controllers/transactions/add-transaction');
 const mobilePayController = require('./controllers/actions/mobilePay');
-const errorController = require('./controllers/error');
 const CardsModel = require('./models/cards');
 const TransactionsModel = require('./models/transactions');
 
@@ -25,7 +24,7 @@ router.delete('/cards/:id', deleteCardController);
 router.get('/cards/:id/transactions', getTransactionsController);
 router.post('/cards/:id/transactions', addTransactionController);
 router.post('/cards/:id/pay', mobilePayController);
-router.all('/error', errorController);
+router.all('/error', errorHandler);
 
 function getView(viewId) {
 	const viewPath = path.resolve(__dirname, 'views', `${viewId}.server.js`);

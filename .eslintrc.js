@@ -24,11 +24,14 @@ module.exports = {
     'no-else-return': 0,
     'arrow-parens': ['error', 'as-needed'],
     'no-param-reassign': 0,
+    'global-require': 0,
+    'no-return-await': 0,
 
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,
-
+    'import/no-dynamic-require': 0,
+    
     'jsx-quotes': [2, 'prefer-single'],
 
     'react/jsx-filename-extension': [1, {'extensions': ['.js', '.jsx']}],

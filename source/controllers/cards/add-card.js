@@ -1,3 +1,5 @@
+const ApplicationError = require('libs/application-error');
+
 module.exports = async ctx => {
   const card = ctx.request.body;
 

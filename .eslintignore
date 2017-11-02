@@ -1,2 +1,3 @@
 /public/**
 /source/views/bundle.server.js
+/source/models/common/model.js

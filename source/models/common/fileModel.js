@@ -1,3 +1,4 @@
+const ApplicationError = require('libs/application-error');
 const path = require('path');
 const fs = require('fs');
 const Model = require('./Model');
@@ -18,7 +19,7 @@ class FileModel extends Model {
   }
 
   async _saveUpdates() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       fs.writeFile(this._filePath, JSON.stringify(this._fileData, null, 2), resolve);
     }).catch(() => {
       throw new ApplicationError('Save model error', 500);

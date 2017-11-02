@@ -1,4 +1,4 @@
-const logger = require('../libs/logger')('wallet-app');
+const logger = require('libs/logger')('wallet-app');
 
 module.exports = async (ctx, next) => {
   try {
