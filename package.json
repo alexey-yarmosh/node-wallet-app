@@ -4,7 +4,6 @@
   "description": "Node.js «Кошелёк» app",
   "author": "",
   "scripts": {
-    "precommit": "npm run-script lint",
     "build": "webpack",
     "lint": "./node_modules/.bin/eslint .",
     "start": "NODE_PATH=. nodemon source/app.js -L",
