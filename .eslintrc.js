@@ -26,6 +26,7 @@ module.exports = {
     'no-param-reassign': 0,
     'global-require': 0,
     'no-return-await': 0,
+    'no-shadow': 0,
 
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,

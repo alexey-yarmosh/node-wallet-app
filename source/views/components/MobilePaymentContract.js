@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import axios from 'axios';
 
 import { Island, Title, Button, Input } from './';
 
@@ -115,7 +116,14 @@ class MobilePaymentContract extends Component {
 			return;
 		}
 
-		this.props.onPaymentSuccess({ sum, phoneNumber, commission });
+		const { activeCard } = this.props;
+
+		axios.post(`/cards/${activeCard.id}/pay`, { sum, phoneNumber })
+		.then(response => {
+			const { sum, phoneNumber } = response.data;
+			this.props.onPaymentSuccess({ sum, phoneNumber, commission });
+		});
+
 	}
 
 	/**
@@ -180,8 +188,7 @@ class MobilePaymentContract extends Component {
 
 MobilePaymentContract.propTypes = {
 	activeCard: PropTypes.shape({
-		id: PropTypes.number,
-		theme: PropTypes.object
+		id: PropTypes.number
 	}).isRequired,
 	onPaymentSuccess: PropTypes.func.isRequired
 };

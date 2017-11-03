@@ -2,18 +2,16 @@ const COMISSION = 3;
 
 module.exports = async ctx => {
     const cardId = parseInt(ctx.params.id, 10);
-    const { amount, phoneNumber } = ctx.request.body;
-    const resultAmount = parseInt(amount, 10) + COMISSION;
+    const { sum, phoneNumber } = ctx.request.body;
+    const resultSum = parseInt(sum, 10) + COMISSION;
 
-    await ctx.cardsModel.pay(cardId, resultAmount);
+    await ctx.cardsModel.pay(cardId, resultSum);
 
     const newTransaction = await ctx.transactionsModel.add({
         type: 'paymentMobile',
-        data: {
-            phoneNumber
-        },
+        phoneNumber,
         cardId,
-        sum: resultAmount
+        sum: resultSum
     });
 
     ctx.status = 201;
