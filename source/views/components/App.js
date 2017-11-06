@@ -55,7 +55,6 @@ class App extends Component {
 	 */
 	constructor() {
 		super();
-
 		const cardsList = this.prepareCardsData(cardsData);
 		const cardHistory = transactionsData.map(data => {
 			const card = cardsList.find(card => card.id === data.cardId);

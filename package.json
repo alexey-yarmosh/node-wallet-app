@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "lint": "./node_modules/.bin/eslint .",
-    "start": "nodemon source/app.js -L",
+    "start": "NODE_PATH=. nodemon source/app.js -L",
     "debug": "node --inspect-brk source/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

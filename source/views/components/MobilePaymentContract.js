@@ -77,9 +77,8 @@ class MobilePaymentContract extends Component {
 	 */
 	constructor(props) {
 		super(props);
-
 		this.state = {
-			phoneNumber: '+79218908064',
+			phoneNumber: '+79287654321',
 			sum: 0,
 			commission: 3
 		};
@@ -118,12 +117,11 @@ class MobilePaymentContract extends Component {
 
 		const { activeCard } = this.props;
 
-		axios.post(`/cards/${activeCard.id}/pay`, { sum, phoneNumber })
+		axios.post(`/cards/${activeCard.id}/pay`, { sum, data: phoneNumber })
 		.then(response => {
-			const { sum, phoneNumber } = response.data;
-			this.props.onPaymentSuccess({ sum, phoneNumber, commission });
+			const { sum, data } = response.data;
+			this.props.onPaymentSuccess({ sum, phoneNumber: data, commission });
 		});
-
 	}
 
 	/**
@@ -160,7 +158,7 @@ class MobilePaymentContract extends Component {
 						<InputPhoneNumber
 							name='phoneNumber'
 							value={this.state.phoneNumber}
-							readOnly='true'
+							onChange={event => this.handleInputChange(event)}
 						/>
 					</InputField>
 					<InputField>

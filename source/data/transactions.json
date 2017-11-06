@@ -343,26 +343,18 @@
   },
   {
     "type": "paymentMobile",
-    "phoneNumber": "+7(921)3333333",
-    "cardId": 3,
-    "sum": 103,
-    "id": 43,
-    "time": "2017-11-03T16:48:43.288Z"
-  },
-  {
-    "type": "paymentMobile",
-    "phoneNumber": "+79218908064",
-    "cardId": 1,
-    "sum": 59,
-    "id": 44,
-    "time": "2017-11-03T16:52:21.304Z"
-  },
-  {
-    "type": "paymentMobile",
-    "phoneNumber": "+79218908064",
+    "data": "+7967676767",
     "cardId": 1,
     "sum": 70,
+    "id": 44,
+    "time": "2017-11-06T15:01:12.179Z"
+  },
+  {
+    "type": "paymentMobile",
+    "data": "+79287654321",
+    "cardId": 1,
+    "sum": 126,
     "id": 45,
-    "time": "2017-11-03T16:53:17.968Z"
+    "time": "2017-11-06T21:31:43.947Z"
   }
 ]
