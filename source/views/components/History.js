@@ -94,7 +94,6 @@ const History = ({ cardHistory }) => {
 			<HistoryTitle>Сегодня</HistoryTitle>
 			{cardHistory.map((item, index) => {
 				const historyItemDate = moment(item.time, moment.ISO_8601);
-				console.log(historyItemDate);
 				const today = moment().format('L');
 				const isTodayHistoryItem = historyItemDate.format('L') === today;
 
