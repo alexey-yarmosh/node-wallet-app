@@ -172,7 +172,10 @@ class MobilePaymentContract extends Component {
 					</InputField>
 					<InputField>
 						<Label>Спишется</Label>
-						<InputCommision value={this.getSumWithCommission()} />
+						<InputCommision
+							value={this.getSumWithCommission()}
+							disabled
+						/>
 						<Currency>$</Currency>
 					</InputField>
 					<Commission>Размер коммиссии составляет {commission} $</Commission>

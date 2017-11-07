@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import axios from 'axios';
 
 import { Card, Title, Button, Island, Input } from './';
 
@@ -24,7 +25,7 @@ const SumInput = styled(Input)`
 	max-width: 200px;
 	padding-right: 20px;
 	background-color: rgba(0, 0, 0, 0.08);
-	color: '#000';
+	color: #000;
 `;
 
 const Currency = styled.span`
@@ -44,7 +45,6 @@ class Withdraw extends Component {
 	 */
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			selectedCard: props.inactiveCardsList[0],
 			sum: 0
@@ -83,7 +83,13 @@ class Withdraw extends Component {
 			return;
 		}
 
-		this.setState({ sum: 0 });
+		const { activeCard } = this.props;
+		const { selectedCard } = this.state;
+
+		axios.post(`/cards/${activeCard.id}/card2CardPay`, { sum, targetCardId: selectedCard.id })
+			.then(() => {
+				this.setState({ sum: 0 });
+			});
 	}
 
 	/**
@@ -97,7 +103,10 @@ class Withdraw extends Component {
 			<form onSubmit={event => this.onSubmitForm(event)}>
 				<WithdrawLayout>
 					<WithdrawTitle>Вывести деньги на карту</WithdrawTitle>
-					<Card type='select' data={inactiveCardsList} />
+					<Card
+						type='select'
+						data={inactiveCardsList}
+					/>
 					<InputField>
 						<SumInput
 							name='sum'
