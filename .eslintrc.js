@@ -27,7 +27,8 @@ module.exports = {
     'global-require': 0,
     'no-return-await': 0,
     'no-shadow': 0,
-
+    'object-curly-newline': 0,
+    
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,

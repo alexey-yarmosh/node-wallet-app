@@ -86,9 +86,7 @@ class Card extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const {
- data, type, active, onClick
-} = this.props;
+		const { data, type, active, onClick } = this.props;
 
 		if (type === 'new') {
 			return (
@@ -115,9 +113,7 @@ class Card extends Component {
 		}
 
 		const { number, theme } = data;
-		const {
- bgColor, textColor, bankLogoUrl, brandLogoUrl
-} = theme;
+		const { bgColor, textColor, bankLogoUrl, brandLogoUrl } = theme;
 		const themedBrandLogoUrl = active ? brandLogoUrl : brandLogoUrl.replace(/-colored.svg$/, '-white.svg');
 
 		return (
