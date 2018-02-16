@@ -28,6 +28,7 @@ module.exports = {
     'no-return-await': 0,
     'no-shadow': 0,
     'object-curly-newline': 0,
+    'no-restricted-globals': 0,
     
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
