@@ -16,7 +16,7 @@ module.exports = [
   {
     name: 'client',
     devtool: 'eval',
-    // watch: true,
+    watch: true,
     entry: './source/views/index.client.js',
     output: {
       path: path.resolve(__dirname, 'public'),
@@ -50,7 +50,7 @@ module.exports = [
   {
     name: 'server',
     devtool: 'eval',
-    // watch: true,
+    watch: true,
     entry: './source/views/index.server.js',
     output: {
       path: path.resolve(__dirname, 'source/views'),

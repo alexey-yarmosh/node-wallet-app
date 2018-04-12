@@ -8,7 +8,9 @@
     "lint": "./node_modules/.bin/eslint .",
     "start": "cross-env NODE_PATH=. nodemon source/app.js -L",
     "debug": "node --inspect-brk source/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clear": "node libs/clear-transactions",
+    "precommit": "npm run clear"
   },
   "repository": {
     "type": "git",

@@ -4,6 +4,7 @@ import styled from 'react-emotion';
 import { Select } from './';
 
 const CardLayout = styled.div`
+	cursor: pointer;
 	position: relative;
 	width: 260px;
 	height: 164px;

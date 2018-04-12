@@ -147,7 +147,7 @@ class PrepaidContract extends Component {
 		return (
 			<form onSubmit={event => this.onSubmitForm(event)}>
 				<PrepaidLayout>
-					<PrepaidTitle>Пополнить карту</PrepaidTitle>
+					<PrepaidTitle>Пополнить эту карту</PrepaidTitle>
 
 					<PrepaidItems>
 						{

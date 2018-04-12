@@ -5,12 +5,21 @@ module.exports = async ctx => {
 
     await ctx.cardsModel.pay(cardId, sum);
     await ctx.cardsModel.earn(targetCardId, sum);
-    const { cardNumber } = await ctx.cardsModel.get(targetCardId);
+
+    const { cardNumber } = await ctx.cardsModel.get(cardId);
+    const { cardNumber: targetCardNumber } = await ctx.cardsModel.get(targetCardId);
 
     const newTransaction = await ctx.transactionsModel.add({
-        type: 'card2Card',
-        data: cardNumber,
+        type: 'withdrawCard',
+        data: targetCardNumber,
         cardId,
+        sum: -sum
+    });
+
+    await ctx.transactionsModel.add({
+        type: 'prepaidCard',
+        data: cardNumber,
+        cardId: targetCardId,
         sum
     });
 

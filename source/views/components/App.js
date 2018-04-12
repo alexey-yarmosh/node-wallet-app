@@ -69,6 +69,15 @@ class App extends Component {
 	}
 
 	/**
+	 * Обработчик переключения карты
+	 *
+	 * @param {Number} activeCardIndex индекс выбранной карты
+	 */
+	onCardChange(activeCardIndex) {
+		this.setState({ activeCardIndex });
+	}
+
+	/**
 	 * Подготавливает данные карт
 	 *
 	 * @param {Object} cardsData данные карт
@@ -98,15 +107,6 @@ class App extends Component {
 	}
 
 	/**
-	 * Обработчик переключения карты
-	 *
-	 * @param {Number} activeCardIndex индекс выбранной карты
-	 */
-	onCardChange(activeCardIndex) {
-		this.setState({ activeCardIndex });
-	}
-
-	/**
 	 * Рендер компонента
 	 *
 	 * @override
@@ -133,7 +133,6 @@ class App extends Component {
 						<Prepaid
 							activeCard={activeCard}
 							inactiveCardsList={inactiveCardsList}
-							onCardChange={newActiveCardIndex => this.onCardChange(newActiveCardIndex)}
 						/>
 						<MobilePayment activeCard={activeCard} />
 						<Withdraw

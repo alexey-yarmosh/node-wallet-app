@@ -64,6 +64,14 @@ const HistoryItemSum = styled.div`
 	text-overflow: ellipsis;
 `;
 
+const sumToString = item => {
+	if (item.sum > 0) {
+		return `+${item.sum}$`;
+	} else {
+		return `${item.sum}$`;
+	}
+};
+
 const History = ({ cardHistory }) => {
 	const getHistoryItemTitle = item => {
 		let typeTitle = '';
@@ -74,7 +82,7 @@ const History = ({ cardHistory }) => {
 				break;
 			}
 			case 'prepaidCard': {
-				typeTitle = 'Пополнение с карты';
+				typeTitle = 'Пополнение карты';
 				break;
 			}
 			case 'withdrawCard': {
@@ -91,16 +99,9 @@ const History = ({ cardHistory }) => {
 
 	return (
 		<HistoryLayout>
-			<HistoryTitle>Сегодня</HistoryTitle>
+			<HistoryTitle>Операции</HistoryTitle>
 			{cardHistory.map((item, index) => {
 				const historyItemDate = moment(item.time, moment.ISO_8601);
-				const today = moment().format('L');
-				const isTodayHistoryItem = historyItemDate.format('L') === today;
-
-				if (!isTodayHistoryItem) {
-					return '';
-				}
-
 				return (
 					<HistoryItem key={index}>
 						<HistoryItemIcon bankSmLogoUrl={item.card.theme.bankSmLogoUrl} />
@@ -111,7 +112,7 @@ const History = ({ cardHistory }) => {
 							{historyItemDate.format('HH:mm')}
 						</HistoryItemTime>
 						<HistoryItemSum>
-							{`${item.sum} $`}
+							{`${sumToString(item)}`}
 						</HistoryItemSum>
 					</HistoryItem>
 				);

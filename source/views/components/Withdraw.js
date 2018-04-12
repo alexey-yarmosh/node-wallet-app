@@ -102,7 +102,7 @@ class Withdraw extends Component {
 		return (
 			<form onSubmit={event => this.onSubmitForm(event)}>
 				<WithdrawLayout>
-					<WithdrawTitle>Вывести деньги на карту</WithdrawTitle>
+					<WithdrawTitle>Перевести деньги на карту</WithdrawTitle>
 					<Card
 						type='select'
 						data={inactiveCardsList}
