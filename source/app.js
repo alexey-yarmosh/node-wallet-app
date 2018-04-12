@@ -24,28 +24,27 @@ function getView(viewId) {
 	return require(viewPath);
 }
 
-// async function getData(ctx) {
-// 	const user = {
-// 		login: 'samuel_johnson',
-// 		name: 'Samuel Johnson'
-// 	};
-// 	const cards = await ctx.cardsModel.getAll();
-// 	const transactions = await ctx.transactionsModel.getAll();
+async function getData(ctx) {
+	const user = {
+		login: 'samuel_johnson',
+		name: 'Samuel Johnson'
+	};
+	const cards = await ctx.cardsModel.getAll();
+	const transactions = await ctx.transactionsModel.getAll();
 
-// 	return {
-// 		user,
-// 		cards,
-// 		transactions
-// 	};
-// }
+	return {
+		user,
+		cards,
+		transactions
+	};
+}
 
 // Сохраним параметр id в ctx.params.id
 router.param('id', (id, ctx, next) => next());
 router.get('/', async ctx => {
-	// In future put 'data' to the indexView
-	// const data = await getData(ctx);
+	const data = await getData(ctx);
 	const indexView = getView('bundle');
-	const indexViewHtml = renderToStaticMarkup(indexView());
+	const indexViewHtml = renderToStaticMarkup(indexView(data));
 	ctx.body = indexViewHtml;
 });
 

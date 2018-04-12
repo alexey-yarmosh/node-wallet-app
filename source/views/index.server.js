@@ -1,12 +1,14 @@
 import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
+import serialize from 'serialize-javascript';
 
 import { App } from './components';
 
-module.exports = () => {
-	const app = renderToString(<App />);
-	const { html, css } = extractCritical(app);
+module.exports = data => {
+	const app = renderToString(<App data={data} />);
+	const { html, ids, css } = extractCritical(app);
+	const appData = `window.__data=${serialize({ ids, app }, 2)};`;
 	return (
 		<html lang='ru'>
 			<head>
@@ -18,6 +20,7 @@ module.exports = () => {
 			</head>
 			<body>
 				<div id='root' dangerouslySetInnerHTML={{ __html: html }} />
+				<script dangerouslySetInnerHTML={{ __html: appData }} />
 				<script src='bundle.client.js' />
 			</body>
 		</html>

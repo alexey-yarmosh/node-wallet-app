@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 import { injectGlobal } from 'emotion';
+import PropTypes from 'prop-types';
 import CardInfo from 'card-info';
 import {
 	CardsBar,
@@ -12,9 +13,6 @@ import {
 } from './';
 
 import './fonts.css';
-
-import cardsData from '../../data/cards.json';
-import transactionsData from '../../data/transactions.json';
 
 injectGlobal`
 	html,
@@ -53,10 +51,10 @@ class App extends Component {
 	/**
 	 * Конструктор
 	 */
-	constructor() {
-		super();
-		const cardsList = this.prepareCardsData(cardsData);
-		const cardHistory = transactionsData.map(data => {
+	constructor(props) {
+		super(props);
+		const cardsList = this.prepareCardsData(props.data.cards);
+		const cardHistory = props.data.transactions.map(data => {
 			const card = cardsList.find(card => card.id === data.cardId);
 			return card ? Object.assign({}, data, { card }) : data;
 		});
@@ -145,5 +143,13 @@ class App extends Component {
 		);
 	}
 }
+
+App.propTypes = {
+	data: PropTypes.shape({
+		user: PropTypes.object,
+		cards: PropTypes.array,
+		transactions: PropTypes.array
+	}),
+};
 
 export default App;

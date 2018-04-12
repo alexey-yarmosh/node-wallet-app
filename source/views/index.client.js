@@ -1,5 +1,10 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrate as hydrateReact } from 'react-dom';
+import { hydrate as hydrateEmotion } from 'emotion';
 import { App } from './components';
 
-hydrate(<App />, document.getElementById('root'));
+const { ids, app } = window.__data;
+console.log(typeof ids);
+console.log(typeof app);
+hydrateEmotion(ids);
+hydrateReact(<App data={app} />, document.getElementById('root'));
