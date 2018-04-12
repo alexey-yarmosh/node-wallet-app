@@ -18,7 +18,37 @@ const CardsModel = require('./models/cards');
 const TransactionsModel = require('./models/transactions');
 
 const app = new Koa();
+
+function getView(viewId) {
+	const viewPath = path.resolve(__dirname, 'views', `${viewId}.server.js`);
+	return require(viewPath);
+}
+
+// async function getData(ctx) {
+// 	const user = {
+// 		login: 'samuel_johnson',
+// 		name: 'Samuel Johnson'
+// 	};
+// 	const cards = await ctx.cardsModel.getAll();
+// 	const transactions = await ctx.transactionsModel.getAll();
+
+// 	return {
+// 		user,
+// 		cards,
+// 		transactions
+// 	};
+// }
+
+// Сохраним параметр id в ctx.params.id
 router.param('id', (id, ctx, next) => next());
+router.get('/', async ctx => {
+	// In future put 'data' to the indexView
+	// const data = await getData(ctx);
+	const indexView = getView('bundle');
+	const indexViewHtml = renderToStaticMarkup(indexView());
+	ctx.body = indexViewHtml;
+});
+
 router.get('/cards', getCardsController);
 router.post('/cards', addCardController);
 router.delete('/cards/:id', deleteCardController);
@@ -27,17 +57,6 @@ router.post('/cards/:id/transactions', addTransactionController);
 router.post('/cards/:id/mobilePay', mobilePayController);
 router.post('/cards/:id/card2CardPay', card2CardPayController);
 router.all('/error', errorHandler);
-
-function getView(viewId) {
-	const viewPath = path.resolve(__dirname, 'views', `${viewId}.server.js`);
-	return require(viewPath);
-}
-
-router.get('/', ctx => {
-	const indexView = getView('bundle');
-	const indexViewHtml = renderToStaticMarkup(indexView());
-	ctx.body = indexViewHtml;
-});
 
 // Getting resources speed
 app.use(async (ctx, next) => {
@@ -48,8 +67,11 @@ app.use(async (ctx, next) => {
 });
 app.use(errorHandler);
 app.use(async (ctx, next) => {
-  ctx.cardsModel = new CardsModel();
-  ctx.transactionsModel = new TransactionsModel();
+	ctx.cardsModel = new CardsModel();
+	ctx.transactionsModel = new TransactionsModel();
+	await ctx.cardsModel.getAll();
+	await ctx.transactionsModel.getAll();
+
   await next();
 });
 app.use(bodyParser);

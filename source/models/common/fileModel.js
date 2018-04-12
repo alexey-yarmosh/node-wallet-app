@@ -6,29 +6,46 @@ const Model = require('./Model');
 class FileModel extends Model {
   constructor(fileName) {
     super();
-    this._filePath = path.join(__dirname, '..', '..', 'data', fileName);
-    this._fileData = require(this._filePath);
+    this.filePath = path.join(__dirname, '..', '..', 'data', fileName);
+    this.fileData = null;
+  }
+
+  async loadFile() {
+    if (this.fileData) return this.fileData;
+    await new Promise((resolve, reject) => {
+      fs.readFile(this.filePath, (err, data) => {
+        if (err) return reject(err);
+        try {
+          this.fileData = JSON.parse(data);
+          return resolve();
+        } catch (error) {
+          return reject(error);
+        }
+      });
+    });
   }
 
   _generateId() {
-    return this._fileData.reduce((max, elem) => Math.max(max, elem.id), 0) + 1;
+    return this.fileData.reduce((max, elem) => Math.max(max, elem.id), 0) + 1;
   }
 
   async getAll() {
-    return await this._fileData;
+    return await this.loadFile();
   }
 
   async _saveUpdates() {
     return new Promise(resolve => {
-      fs.writeFile(this._filePath, JSON.stringify(this._fileData, null, 2), resolve);
+      fs.writeFile(this.filePath, JSON.stringify(this.fileData, null, 2), resolve);
     }).catch(() => {
       throw new ApplicationError('Save model error', 500);
     });
   }
 
   async get(id) {
-    const allItems = await this.getAll();
-    return allItems.find(item => item.id === id);
+    if (this.fileData === null) {
+			throw new Error('Data not loaded');
+		}
+		return this.fileData.find(item => item.id === id);
   }
 }
 

@@ -8,23 +8,23 @@ class Cards extends FileModel {
 
   async add(card) {
     card.id = this._generateId();
-    this._fileData.push(card);
+    this.fileData.push(card);
     await this._saveUpdates();
     return card;
   }
 
   async delete(id) {
-    const card = this._fileData.find(item => item.id === id);
+    const card = this.fileData.find(item => item.id === id);
     if (!card) {
       throw new ApplicationError(`Card with ID=${id} not found`, 404);
     }
-    const cardIndex = this._fileData.indexOf(card);
-    this._fileData.splice(cardIndex, 1);
+    const cardIndex = this.fileData.indexOf(card);
+    this.fileData.splice(cardIndex, 1);
     await this._saveUpdates();
   }
 
   async pay(id, sum) {
-    const card = this._fileData.find(item => item.id === id);
+    const card = this.fileData.find(item => item.id === id);
     if (!card) {
       throw new ApplicationError(`Card with ID=${id} not found`, 404);
     }
@@ -33,7 +33,7 @@ class Cards extends FileModel {
   }
 
   async earn(id, sum) {
-    const card = this._fileData.find(item => item.id === id);
+    const card = this.fileData.find(item => item.id === id);
     if (!card) {
       throw new ApplicationError(`Card with ID=${id} not found`, 404);
     }

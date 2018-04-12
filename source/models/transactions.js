@@ -8,7 +8,7 @@ class Transactions extends FileModel {
   async add(transaction) {
     transaction.id = this._generateId();
     transaction.time = new Date().toISOString();
-    this._fileData.unshift(transaction);
+    this.fileData.unshift(transaction);
     await this._saveUpdates();
     return transaction;
   }

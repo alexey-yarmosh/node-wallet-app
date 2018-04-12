@@ -30,7 +30,8 @@ module.exports = {
     'object-curly-newline': 0,
     'no-restricted-globals': 0,
     'class-methods-use-this': 0,
-    'no-unused-expressions': 0, // (because of emotion plugin) TODO 🔥: remove this 
+    'no-unused-expressions': 0, // (because of emotion plugin) TODO 🔥: remove this
+    'consistent-return': 0,
     
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
