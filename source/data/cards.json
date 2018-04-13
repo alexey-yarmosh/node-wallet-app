@@ -2,31 +2,31 @@
   {
     "id": 1,
     "cardNumber": "546925000000000",
-    "balance": 9445
+    "balance": -25002
   },
   {
     "id": 2,
     "cardNumber": "676230000000000",
-    "balance": 555
+    "balance": 1000
   },
   {
     "id": 3,
     "cardNumber": "405870000000000",
-    "balance": 0
+    "balance": -8000
   },
   {
     "id": 4,
     "cardNumber": "550064000000000",
-    "balance": 0
+    "balance": 3000
   },
   {
     "id": 5,
     "cardNumber": "437784000000000",
-    "balance": 0
+    "balance": 14000
   },
   {
     "id": 6,
     "cardNumber": "676803000000000",
-    "balance": 0
+    "balance": 24000
   }
 ]

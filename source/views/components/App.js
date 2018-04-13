@@ -113,9 +113,9 @@ class App extends Component {
 	render() {
 		const { cardsList, rootCardId, cardHistory } = this.state;
 		const activeCard = cardsList.find(card => card.id === rootCardId);
-
 		const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
 		const filteredHistory = cardHistory.filter(data => data.cardId === rootCardId);
+		console.log(inactiveCardsList);
 
 		return (
 			<Wallet>

@@ -66,18 +66,22 @@ class Card extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			activeCardIndex: 0
-		};
+		if (props.data && props.data.length) {
+			this.state = {
+				activeCard: props.data[0]
+			};
+		}
 	}
 
 	/**
 	 * Обработчик переключения карты
 	 *
-	 * @param {Number} activeCardIndex индекс выбранной карты
+	 * @param {Number} activeCardId id выбранной карты
 	 */
 	onCardChange(activeCardIndex) {
-		this.setState({ activeCardIndex });
+		const activeCard = this.props.data[activeCardIndex];
+		this.setState({ activeCard });
+		this.props.onCardChange(activeCard);
 	}
 
 	/**
@@ -96,9 +100,8 @@ class Card extends Component {
 		}
 
 		if (type === 'select') {
-			const { activeCardIndex } = this.state;
-			const selectedCard = data[activeCardIndex];
-			const { bgColor, bankLogoUrl, brandLogoUrl } = selectedCard.theme;
+			const { activeCard } = this.state;
+			const { bgColor, bankLogoUrl, brandLogoUrl } = activeCard.theme;
 
 			return (
 				<CardLayout active bgColor={bgColor}>
@@ -133,7 +136,8 @@ Card.propTypes = {
 	data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 	type: PropTypes.string,
 	active: PropTypes.bool,
-	onClick: PropTypes.func
+	onClick: PropTypes.func,
+	onCardChange: PropTypes.func
 };
 
 export default Card;
