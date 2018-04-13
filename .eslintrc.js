@@ -32,6 +32,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'no-unused-expressions': 0, // (because of emotion plugin) TODO 🔥: remove this
     'consistent-return': 0,
+    'no-underscore-dangle': 0,
     
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
