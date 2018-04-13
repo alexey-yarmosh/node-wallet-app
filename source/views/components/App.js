@@ -127,16 +127,16 @@ class App extends Component {
 				<CardPane>
 					<Header activeCard={activeCard} />
 					<Workspace>
+						<Withdraw
+							activeCard={activeCard}
+							inactiveCardsList={inactiveCardsList}
+						/>
 						<History cardHistory={filteredHistory} />
 						<Prepaid
 							activeCard={activeCard}
 							inactiveCardsList={inactiveCardsList}
 						/>
 						<MobilePayment activeCard={activeCard} />
-						<Withdraw
-							activeCard={activeCard}
-							inactiveCardsList={inactiveCardsList}
-						/>
 					</Workspace>
 				</CardPane>
 			</Wallet>

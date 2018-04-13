@@ -9,8 +9,11 @@
     "start": "cross-env NODE_PATH=. nodemon source/app.js -L",
     "debug": "node --inspect-brk source/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clear": "node libs/clear-transactions",
-    "precommit": "npm run clear"
+    "reset": "node libs/reset-data",
+    "precommit": "npm run reset"
+  },
+  "nodemonConfig": {
+    "ignore": ["data/*"]
   },
   "repository": {
     "type": "git",

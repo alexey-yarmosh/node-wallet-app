@@ -47,7 +47,7 @@ class Withdraw extends Component {
 		super(props);
 		this.state = {
 			selectedCard: props.inactiveCardsList[0],
-			sum: 0
+			sum: ''
 		};
 	}
 
@@ -65,6 +65,8 @@ class Withdraw extends Component {
 		this.setState({
 			[name]: value
 		});
+
+		console.log(this.state);
 	}
 
 	/**
@@ -87,9 +89,9 @@ class Withdraw extends Component {
 		const { selectedCard } = this.state;
 
 		axios.post(`/cards/${activeCard.id}/card2CardPay`, { sum, targetCardId: selectedCard.id })
-			.then(() => {
-				this.setState({ sum: 0 });
-			});
+			// .then(() => {
+			// 	this.setState({ sum: '' });
+			// });
 	}
 
 	/**
