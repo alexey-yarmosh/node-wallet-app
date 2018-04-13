@@ -36,11 +36,10 @@ const Footer = styled.footer`
 	font-size: 15px;
 `;
 
-const CardsBar = ({ activeCardIndex, cardsList, onCardChange }) => {
-	const onCardClick = activeCardIndex => {
-		onCardChange && onCardChange(activeCardIndex);
+const CardsBar = ({ rootCardId, cardsList, onCardChange }) => {
+	const onCardClick = rootCardId => {
+		onCardChange && onCardChange(rootCardId);
 	};
-
 	return (
 		<Layout>
 			<Logo />
@@ -50,8 +49,8 @@ const CardsBar = ({ activeCardIndex, cardsList, onCardChange }) => {
 					<Card
 						key={index}
 						data={card}
-						active={index === activeCardIndex}
-						onClick={() => onCardClick(index)}
+						active={card.id === rootCardId}
+						onClick={() => onCardClick(card.id)}
 					/>
 				))}
 				<Card type='new' />
@@ -63,7 +62,7 @@ const CardsBar = ({ activeCardIndex, cardsList, onCardChange }) => {
 
 CardsBar.propTypes = {
 	cardsList: PropTypes.array.isRequired,
-	activeCardIndex: PropTypes.number.isRequired,
+	rootCardId: PropTypes.number.isRequired,
 	onCardChange: PropTypes.func.isRequired
 };
 

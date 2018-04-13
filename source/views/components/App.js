@@ -62,7 +62,7 @@ class App extends Component {
 		this.state = {
 			cardsList,
 			cardHistory,
-			activeCardIndex: 0
+			rootCardId: cardsList[0].id
 		};
 	}
 
@@ -71,8 +71,8 @@ class App extends Component {
 	 *
 	 * @param {Number} activeCardIndex индекс выбранной карты
 	 */
-	onCardChange(activeCardIndex) {
-		this.setState({ activeCardIndex });
+	onCardChange(rootCardId) {
+		this.setState({ rootCardId });
 	}
 
 	/**
@@ -111,24 +111,24 @@ class App extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const { cardsList, activeCardIndex, cardHistory } = this.state;
-		const activeCard = cardsList[activeCardIndex];
+		const { cardsList, rootCardId, cardHistory } = this.state;
+		const activeCard = cardsList.find(card => card.id === rootCardId);
 
-		const inactiveCardsList = cardsList.filter((card, index) => (index === activeCardIndex ? false : card));
-		const filteredHistory = cardHistory.filter(data => data.cardId === activeCard.id);
+		const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
+		const filteredHistory = cardHistory.filter(data => data.cardId === rootCardId);
 
 		return (
 			<Wallet>
 				<CardsBar
-					activeCardIndex={activeCardIndex}
+					rootCardId={rootCardId}
 					cardsList={cardsList}
-					onCardChange={activeCardIndex => this.onCardChange(activeCardIndex)}
+					onCardChange={rootCardId => this.onCardChange(rootCardId)}
 				/>
 				<CardPane>
 					<Header activeCard={activeCard} />
 					<Workspace>
 						<Withdraw
-							activeCard={activeCard}
+							rootCardId={rootCardId}
 							inactiveCardsList={inactiveCardsList}
 						/>
 						<History cardHistory={filteredHistory} />

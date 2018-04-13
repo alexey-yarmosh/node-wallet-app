@@ -46,6 +46,7 @@ module.exports = {
     'react/jsx-indent-props': 0,
     'react/jsx-closing-bracket-location': [1, 'tag-aligned'],
     'react/require-default-props': 0,
-    'react/no-array-index-key': 0
+    'react/no-array-index-key': 0,
+    'react/forbid-prop-types': 0
   }
 };

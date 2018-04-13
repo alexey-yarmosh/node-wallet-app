@@ -65,8 +65,6 @@ class Withdraw extends Component {
 		this.setState({
 			[name]: value
 		});
-
-		console.log(this.state);
 	}
 
 	/**
@@ -85,10 +83,10 @@ class Withdraw extends Component {
 			return;
 		}
 
-		const { activeCard } = this.props;
+		const { rootCardId } = this.props;
 		const { selectedCard } = this.state;
 
-		axios.post(`/cards/${activeCard.id}/card2CardPay`, { sum, targetCardId: selectedCard.id })
+		axios.post(`/cards/${rootCardId}/card2CardPay`, { sum, targetCardId: selectedCard.id });
 			// .then(() => {
 			// 	this.setState({ sum: '' });
 			// });
@@ -125,10 +123,7 @@ class Withdraw extends Component {
 }
 
 Withdraw.propTypes = {
-	activeCard: PropTypes.shape({
-		id: PropTypes.number,
-		theme: PropTypes.object
-	}).isRequired,
+	rootCardId: PropTypes.number.isRequired,
 	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
