@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { Select } from './';
@@ -57,64 +57,45 @@ const CardSelect = styled(Select)`
 /**
  * Карта
  */
-class Card extends Component {
-	/**
-	 * Обработчик переключения карты
-	 *
-	 * @param {Number} selectedCardId id выбранной карты
-	 */
-	onCardChange(selectedCardIndex) {
-		const selectedCardId = this.props.data[selectedCardIndex].id;
-		this.props.onCardChange(selectedCardId);
+function Card(props) {
+	const { data, type, active, onClick, selectedCardId, onCardChange } = props;
+
+	if (type === 'new') {
+		return (
+			<NewCardLayout />
+		);
 	}
 
-	/**
-	 * Рендер компонента
-	 *
-	 * @override
-	 * @returns {JSX}
-	 */
-	render() {
-		const { data, type, active, onClick } = this.props;
-
-		if (type === 'new') {
-			return (
-				<NewCardLayout />
-			);
-		}
-
-		if (type === 'select') {
-			const { selectedCardId, data } = this.props;
-			const activeCard = data.find(card => card.id === selectedCardId);
-			const { bgColor, bankLogoUrl, brandLogoUrl } = activeCard.theme;
-
-			return (
-				<CardLayout active bgColor={bgColor}>
-					<CardLogo url={bankLogoUrl} active />
-					<CardSelect value={activeCard.number} onChange={selectedCardIndex => this.onCardChange(selectedCardIndex)}>
-						{data.map((card, index) => (
-							<Select.Option key={index} value={`${index}`}>{card.number}</Select.Option>
-						))}
-					</CardSelect>
-					<CardType url={brandLogoUrl} active />
-				</CardLayout>
-			);
-		}
-
-		const { number, theme } = data;
-		const { bgColor, textColor, bankLogoUrl, brandLogoUrl } = theme;
-		const themedBrandLogoUrl = active ? brandLogoUrl : brandLogoUrl.replace(/-colored.svg$/, '-white.svg');
+	if (type === 'select') {
+		const activeCard = data.find(card => card.id === selectedCardId);
+		const { bgColor, bankLogoUrl, brandLogoUrl } = activeCard.theme;
 
 		return (
-			<CardLayout active={active} bgColor={bgColor} onClick={onClick} >
-				<CardLogo url={bankLogoUrl} active={active} />
-				<CardNumber textColor={textColor} active={active}>
-					{number}
-				</CardNumber>
-				<CardType url={themedBrandLogoUrl} active={active} />
+			<CardLayout active bgColor={bgColor}>
+				<CardLogo url={bankLogoUrl} active />
+				<CardSelect value={activeCard.number} onChange={id => onCardChange(parseInt(id, 10))}>
+					{data.map((card, index) => (
+						<Select.Option key={index} value={`${card.id}`}>{card.number}</Select.Option>
+					))}
+				</CardSelect>
+				<CardType url={brandLogoUrl} active />
 			</CardLayout>
 		);
 	}
+
+	const { number, theme } = data;
+	const { bgColor, textColor, bankLogoUrl, brandLogoUrl } = theme;
+	const themedBrandLogoUrl = active ? brandLogoUrl : brandLogoUrl.replace(/-colored.svg$/, '-white.svg');
+
+	return (
+		<CardLayout active={active} bgColor={bgColor} onClick={onClick} >
+			<CardLogo url={bankLogoUrl} active={active} />
+			<CardNumber textColor={textColor} active={active}>
+				{number}
+			</CardNumber>
+			<CardType url={themedBrandLogoUrl} active={active} />
+		</CardLayout>
+	);
 }
 
 Card.propTypes = {

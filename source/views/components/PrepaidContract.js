@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import axios from 'axios';
 
 import { Island, Title, Button, Input } from './';
 
@@ -83,7 +84,7 @@ class PrepaidContract extends Component {
 
 		this.state = {
 			activeCardIndex: 0,
-			sum: 0
+			sum: ''
 		};
 	}
 
@@ -120,18 +121,22 @@ class PrepaidContract extends Component {
 			event.preventDefault();
 		}
 
-		const { sum } = this.state;
-		const { activeCard } = this.props;
+		const { sum, activeCardIndex } = this.state;
+		const { activeCard, inactiveCardsList } = this.props;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
 		}
 
-		this.props.onPaymentSuccess({
-			sum,
-			number: activeCard.number
-		});
+		axios.post(`/cards/${inactiveCardsList[activeCardIndex].id}/card2CardPay`, { sum, targetCardId: activeCard.id })
+			.then(() => {
+				this.setState({ sum: '' });
+				this.props.onPaymentSuccess({
+					sum,
+					number: activeCard.number
+				});
+			});
 	}
 
 	/**
@@ -166,7 +171,7 @@ class PrepaidContract extends Component {
 										textColor={card.theme.textColor}
 										selected={activeCardIndex === index}
 									>
-										C банковской карты
+										C карты
 										<PrepaidItemDescription
 											textColor={card.theme.textColor}
 											selected={activeCardIndex === index}

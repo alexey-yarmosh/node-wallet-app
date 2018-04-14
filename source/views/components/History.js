@@ -82,7 +82,7 @@ const History = ({ cardHistory }) => {
 				break;
 			}
 			case 'prepaidCard': {
-				typeTitle = 'Пополнение карты';
+				typeTitle = 'Пополнение c карты';
 				break;
 			}
 			case 'withdrawCard': {
@@ -94,7 +94,7 @@ const History = ({ cardHistory }) => {
 			}
 		}
 
-		return `${typeTitle}: ${item.data}`;
+		return `${typeTitle} ${item.data}`;
 	};
 
 	return (
