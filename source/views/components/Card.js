@@ -59,29 +59,13 @@ const CardSelect = styled(Select)`
  */
 class Card extends Component {
 	/**
-	 * Конструктор
-	 *
-	 * @param {Object} props свойства компонента
-	 */
-	constructor(props) {
-		super(props);
-
-		if (props.data && props.data.length) {
-			this.state = {
-				activeCard: props.data[0]
-			};
-		}
-	}
-
-	/**
 	 * Обработчик переключения карты
 	 *
-	 * @param {Number} activeCardId id выбранной карты
+	 * @param {Number} selectedCardId id выбранной карты
 	 */
-	onCardChange(activeCardIndex) {
-		const activeCard = this.props.data[activeCardIndex];
-		this.setState({ activeCard });
-		this.props.onCardChange(activeCard);
+	onCardChange(selectedCardIndex) {
+		const selectedCardId = this.props.data[selectedCardIndex].id;
+		this.props.onCardChange(selectedCardId);
 	}
 
 	/**
@@ -100,13 +84,14 @@ class Card extends Component {
 		}
 
 		if (type === 'select') {
-			const { activeCard } = this.state;
+			const { selectedCardId, data } = this.props;
+			const activeCard = data.find(card => card.id === selectedCardId);
 			const { bgColor, bankLogoUrl, brandLogoUrl } = activeCard.theme;
 
 			return (
 				<CardLayout active bgColor={bgColor}>
 					<CardLogo url={bankLogoUrl} active />
-					<CardSelect defaultValue='0' onChange={activeCardIndex => this.onCardChange(activeCardIndex)}>
+					<CardSelect defaultValue='0' onChange={selectedCardIndex => this.onCardChange(selectedCardIndex)}>
 						{data.map((card, index) => (
 							<Select.Option key={index} value={`${index}`}>{card.number}</Select.Option>
 						))}
@@ -134,6 +119,7 @@ class Card extends Component {
 
 Card.propTypes = {
 	data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+	selectedCardId: PropTypes.number,
 	type: PropTypes.string,
 	active: PropTypes.bool,
 	onClick: PropTypes.func,

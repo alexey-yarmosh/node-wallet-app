@@ -46,9 +46,15 @@ class Withdraw extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedCardId: props.inactiveCardsList[0],
+			selectedCardId: props.inactiveCardsList[0].id,
 			sum: ''
 		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			selectedCardId: nextProps.inactiveCardsList[0].id,
+		});
 	}
 
 	/**
@@ -76,20 +82,18 @@ class Withdraw extends Component {
 			event.preventDefault();
 		}
 
-		const { sum } = this.state;
+		const { sum, selectedCardId } = this.state;
+		const { rootCardId } = this.props;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
 		}
 
-		const { rootCardId } = this.props;
-		const { selectedCardId } = this.state;
-
-		axios.post(`/cards/${rootCardId}/card2CardPay`, { sum, targetCardId: selectedCardId });
-			// .then(() => {
-			// 	this.setState({ sum: '' });
-			// });
+		axios.post(`/cards/${rootCardId}/card2CardPay`, { sum, targetCardId: selectedCardId })
+			.then(() => {
+				this.setState({ sum: '' });
+			});
 	}
 
 	onCardChange(targetId) {
@@ -103,7 +107,7 @@ class Withdraw extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const { inactiveCardsList, rootCardId } = this.props;
+		const { inactiveCardsList } = this.props;
 
 		return (
 			<form onSubmit={event => this.onSubmitForm(event)}>
@@ -112,6 +116,7 @@ class Withdraw extends Component {
 					<Card
 						type='select'
 						data={inactiveCardsList}
+						selectedCardId={this.state.selectedCardId}
 						onCardChange={targetId => this.onCardChange(targetId)}
 					/>
 					<InputField>
