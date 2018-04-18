@@ -96,9 +96,9 @@ class Withdraw extends Component {
 			});
 	}
 
-	onCardChange(targetId) {
+	onCardChange(selectedCardId) {
 		this.setState({
-			selectedCardId: targetId
+			selectedCardId
 		});
 	}
 
@@ -117,7 +117,7 @@ class Withdraw extends Component {
 						type='select'
 						data={inactiveCardsList}
 						selectedCardId={this.state.selectedCardId}
-						onCardChange={targetId => this.onCardChange(targetId)}
+						onCardChange={selectedCardId => this.onCardChange(selectedCardId)}
 					/>
 					<InputField>
 						<SumInput

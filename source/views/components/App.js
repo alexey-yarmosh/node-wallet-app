@@ -128,7 +128,7 @@ class App extends Component {
 					<Workspace>
 						<History cardHistory={filteredHistory} />
 						<Prepaid
-							activeCard={activeCard}
+							rootCardId={rootCardId}
 							inactiveCardsList={inactiveCardsList}
 						/>
 						<MobilePayment activeCard={activeCard} />

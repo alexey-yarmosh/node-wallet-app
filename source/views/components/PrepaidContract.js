@@ -83,17 +83,24 @@ class PrepaidContract extends Component {
 		super(props);
 
 		this.state = {
-			activeCardIndex: 0,
+			selectedCardId: props.inactiveCardsList[0].id,
 			sum: ''
 		};
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			selectedCardId: nextProps.inactiveCardsList[0].id,
+		});
+	}
+
+
 	/**
 	 * Изменения активной карты
-	 * @param {Number} activeCardIndex индекс активной карты
+	 * @param {Number} selectedCardId id активной карты
 	 */
-	onCardChange(activeCardIndex) {
-		this.setState({ activeCardIndex });
+	onCardChange(selectedCardId) {
+		this.setState({ selectedCardId });
 	}
 
 	/**
@@ -121,20 +128,20 @@ class PrepaidContract extends Component {
 			event.preventDefault();
 		}
 
-		const { sum, activeCardIndex } = this.state;
-		const { activeCard, inactiveCardsList } = this.props;
+		const { sum, selectedCardId } = this.state;
+		const { rootCardId, inactiveCardsList } = this.props;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
 		}
 
-		axios.post(`/cards/${inactiveCardsList[activeCardIndex].id}/card2CardPay`, { sum, targetCardId: activeCard.id })
+		axios.post(`/cards/${selectedCardId}/card2CardPay`, { sum, targetCardId: rootCardId })
 			.then(() => {
 				this.setState({ sum: '' });
 				this.props.onPaymentSuccess({
 					sum,
-					number: activeCard.number
+					number: inactiveCardsList.find(card => card.id === selectedCardId).number
 				});
 			});
 	}
@@ -146,8 +153,8 @@ class PrepaidContract extends Component {
 	render() {
 		const { inactiveCardsList } = this.props;
 
-		const { activeCardIndex } = this.state;
-		const selectedCard = inactiveCardsList[activeCardIndex];
+		const { selectedCardId } = this.state;
+		const selectedCard = inactiveCardsList.find(card => card.id === selectedCardId);
 
 		return (
 			<form onSubmit={event => this.onSubmitForm(event)}>
@@ -156,25 +163,25 @@ class PrepaidContract extends Component {
 
 					<PrepaidItems>
 						{
-							inactiveCardsList.map((card, index) => (
+							inactiveCardsList.map(card => (
 								<PrepaidItem
 									bgColor={card.theme.bgColor}
 									key={card.id}
-									onClick={() => this.onCardChange(index)}
-									selected={activeCardIndex === index}
+									onClick={() => this.onCardChange(card.id)}
+									selected={selectedCardId === card.id}
 								>
 									<PrepaidItemIcon
 										bankSmLogoUrl={card.theme.bankSmLogoUrl}
-										selected={activeCardIndex === index}
+										selected={selectedCardId === card.id}
 									/>
 									<PrepaidItemTitle
 										textColor={card.theme.textColor}
-										selected={activeCardIndex === index}
+										selected={selectedCardId === card.id}
 									>
 										C карты
 										<PrepaidItemDescription
 											textColor={card.theme.textColor}
-											selected={activeCardIndex === index}
+											selected={selectedCardId === card.id}
 										>
 											{card.number}
 										</PrepaidItemDescription>
@@ -206,10 +213,7 @@ class PrepaidContract extends Component {
 }
 
 PrepaidContract.propTypes = {
-	activeCard: PropTypes.shape({
-		id: PropTypes.number,
-		theme: PropTypes.object
-	}).isRequired,
+	rootCardId: PropTypes.number.isRequired,
 	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired,
 	onPaymentSuccess: PropTypes.func.isRequired
 };

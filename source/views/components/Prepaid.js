@@ -18,6 +18,14 @@ class Prepaid extends Component {
 		this.state = { stage: 'contract' };
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (this.props.rootCardId !== nextProps.rootCardId) {
+			this.setState({
+				stage: 'contract'
+			});
+		}
+	}
+
 	/**
 	 * Обработка успешного платежа
 	 * @param {Object} transaction данные о транзакции
@@ -41,10 +49,10 @@ class Prepaid extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const { transaction } = this.state;
-		const { activeCard, inactiveCardsList } = this.props;
+		const { transaction, stage } = this.state;
+		const { rootCardId, inactiveCardsList } = this.props;
 
-		if (this.state.stage === 'success') {
+		if (stage === 'success') {
 			return (
 				<PrepaidSuccess transaction={transaction} repeatPayment={() => this.repeatPayment()} />
 			);
@@ -52,7 +60,7 @@ class Prepaid extends Component {
 
 		return (
 			<PrepaidContract
-				activeCard={activeCard}
+			rootCardId={rootCardId}
 				inactiveCardsList={inactiveCardsList}
 				onPaymentSuccess={transaction => this.onPaymentSuccess(transaction)}
 			/>
@@ -61,9 +69,7 @@ class Prepaid extends Component {
 }
 
 Prepaid.propTypes = {
-	activeCard: PropTypes.shape({
-		id: PropTypes.number
-	}).isRequired,
+	rootCardId: PropTypes.number.isRequired,
 	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
