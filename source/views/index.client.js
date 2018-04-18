@@ -20,7 +20,7 @@ const store = createStore(rootReducer, initState);
 hydrateEmotion(ids);
 hydrateReact(
   <Provider store={store}>
-    <App data={store.getState()} />
+    <App />
   </Provider>,
   document.getElementById('root')
 );

@@ -50,19 +50,6 @@ const Workspace = styled.div`
  * Приложение
  */
 class App extends Component {
-	constructor(props) {
-		super(props);
-		const { data } = props;
-
-		this.state = {
-			cardsList: prepareCardsData(data.cards),
-			cardHistory: data.transactions.map(transaction => {
-				const card = data.cards.find(card => card.id === transaction.cardId);
-				return card ? Object.assign({}, transaction, { card }) : transaction;
-			}),
-			rootCardId: data.cards[0].id
-		}
-	}
 	/**
 	 * Обработчик переключения карты
 	 *
@@ -79,7 +66,7 @@ class App extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const { cardsList, rootCardId, cardHistory } = this.state;
+		const { cardsList, rootCardId, cardHistory } = this.props;
 		const rootCard = cardsList.find(card => card.id === rootCardId);
 		const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
 		const filteredHistory = cardHistory.filter(data => data.cardId === rootCardId);
@@ -112,11 +99,9 @@ class App extends Component {
 }
 
 App.propTypes = {
-	data: PropTypes.shape({
-		user: PropTypes.object,
-		cards: PropTypes.array,
-		transactions: PropTypes.array
-	}),
+	rootCardId: PropTypes.number,
+	cardsList: PropTypes.array,
+	cardHistory: PropTypes.array
 };
 
 /**
@@ -148,18 +133,21 @@ function prepareCardsData(cardsData) { // TODO 🔥: move to utils.js
 	});
 }
 
-// const mapStateToProps = state => ({
-// 	cardsList: prepareCardsData(state.cards),
-// 	cardHistory: state.transactions.map(transaction => {
-// 		const card = state.cards.find(card => card.id === transaction.cardId);
-// 		return card ? Object.assign({}, transaction, { card }) : transaction;
-// 	}),
-// 	rootCardId: state.cards[0].id
-// });
+const mapStateToProps = state => {
+	const cardsList = prepareCardsData(state.cards);
+	const cardHistory = state.transactions.map(transaction => {
+		const card = cardsList.find(card => card.id === transaction.cardId);
+		return card ? Object.assign({}, transaction, { card }) : transaction;
+	});
 
-// export default connect(
-// 	mapStateToProps,
-// 	() => ({})
-// )(App);
+	return {
+		rootCardId: cardsList[0].id,
+		cardsList,
+		cardHistory
+	};
+};
 
-export default App;
+export default connect(
+	mapStateToProps,
+	() => ({})
+)(App);

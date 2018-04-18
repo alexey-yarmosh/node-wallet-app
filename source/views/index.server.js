@@ -19,7 +19,7 @@ module.exports = initData => {
 
 	const app = renderToString(
 		<Provider store={store}>
-			<App data={store.getState()} />
+			<App />
 		</Provider>
 	);
 
