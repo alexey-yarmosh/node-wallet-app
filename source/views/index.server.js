@@ -2,13 +2,29 @@ import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
 import { App } from './components';
+import reducers from './reducers';
 
-module.exports = appData => {
-	const app = renderToString(<App data={appData} />);
+module.exports = initData => {
+	const initState = {
+		cards: initData.cards,
+		transactions: initData.transactions
+	};
+
+	const rootReducer = combineReducers(reducers);
+	const store = createStore(rootReducer, initState);
+
+	const app = renderToString(
+		<Provider store={store}>
+			<App data={store.getState()} />
+		</Provider>
+	);
+
 	const { html, ids, css } = extractCritical(app);
-	const viewData = `window.__data=${serialize({ ids, appData })};`;
+	const viewData = `window.__data=${serialize({ ids, initData })};`;
 	return (
 		<html lang='ru'>
 			<head>

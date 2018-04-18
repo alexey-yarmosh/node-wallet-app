@@ -3,6 +3,8 @@ import styled from 'react-emotion';
 import { injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
 import CardInfo from 'card-info';
+import { connect } from 'react-redux';
+
 import {
 	CardsBar,
 	Header,
@@ -48,24 +50,19 @@ const Workspace = styled.div`
  * Приложение
  */
 class App extends Component {
-	/**
-	 * Конструктор
-	 */
 	constructor(props) {
 		super(props);
-		const cardsList = this.prepareCardsData(props.data.cards);
-		const cardHistory = props.data.transactions.map(data => {
-			const card = cardsList.find(card => card.id === data.cardId);
-			return card ? Object.assign({}, data, { card }) : data;
-		});
+		const { data } = props;
 
 		this.state = {
-			cardsList,
-			cardHistory,
-			rootCardId: cardsList[0].id
-		};
+			cardsList: prepareCardsData(data.cards),
+			cardHistory: data.transactions.map(transaction => {
+				const card = data.cards.find(card => card.id === transaction.cardId);
+				return card ? Object.assign({}, transaction, { card }) : transaction;
+			}),
+			rootCardId: data.cards[0].id
+		}
 	}
-
 	/**
 	 * Обработчик переключения карты
 	 *
@@ -73,35 +70,6 @@ class App extends Component {
 	 */
 	onCardChange(rootCardId) {
 		this.setState({ rootCardId });
-	}
-
-	/**
-	 * Подготавливает данные карт
-	 *
-	 * @param {Object} cardsData данные карт
-	 * @returns {Object[]}
-	 */
-	prepareCardsData(cardsData) {
-		return cardsData.map(card => {
-			const cardInfo = new CardInfo(card.cardNumber, {
-				banksLogosPath: '/assets/',
-				brandsLogosPath: '/assets/'
-			});
-
-			return {
-				id: card.id,
-				balance: card.balance,
-				number: cardInfo.numberNice,
-				bankName: cardInfo.bankName,
-				theme: {
-					bgColor: cardInfo.backgroundColor,
-					textColor: cardInfo.textColor,
-					bankLogoUrl: cardInfo.bankLogoSvg,
-					brandLogoUrl: cardInfo.brandLogoSvg,
-					bankSmLogoUrl: `/assets/${cardInfo.bankAlias}-history.svg`
-				}
-			};
-		});
 	}
 
 	/**
@@ -150,5 +118,48 @@ App.propTypes = {
 		transactions: PropTypes.array
 	}),
 };
+
+/**
+ * Подготавливает данные карт
+ *
+ * @param {Object} cardsData данные карт
+ * @returns {Object[]}
+ */
+function prepareCardsData(cardsData) { // TODO 🔥: move to utils.js
+	return cardsData.map(card => {
+		const cardInfo = new CardInfo(card.cardNumber, {
+			banksLogosPath: '/assets/',
+			brandsLogosPath: '/assets/'
+		});
+
+		return {
+			id: card.id,
+			balance: card.balance,
+			number: cardInfo.numberNice,
+			bankName: cardInfo.bankName,
+			theme: {
+				bgColor: cardInfo.backgroundColor,
+				textColor: cardInfo.textColor,
+				bankLogoUrl: cardInfo.bankLogoSvg,
+				brandLogoUrl: cardInfo.brandLogoSvg,
+				bankSmLogoUrl: `/assets/${cardInfo.bankAlias}-history.svg`
+			}
+		};
+	});
+}
+
+// const mapStateToProps = state => ({
+// 	cardsList: prepareCardsData(state.cards),
+// 	cardHistory: state.transactions.map(transaction => {
+// 		const card = state.cards.find(card => card.id === transaction.cardId);
+// 		return card ? Object.assign({}, transaction, { card }) : transaction;
+// 	}),
+// 	rootCardId: state.cards[0].id
+// });
+
+// export default connect(
+// 	mapStateToProps,
+// 	() => ({})
+// )(App);
 
 export default App;
