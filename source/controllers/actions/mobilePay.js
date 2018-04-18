@@ -1,4 +1,4 @@
-const COMISSION = 3;
+const { COMISSION } = require('../../constants');
 
 module.exports = async ctx => {
     const cardId = parseInt(ctx.params.id, 10);

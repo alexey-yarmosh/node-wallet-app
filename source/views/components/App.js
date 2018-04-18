@@ -112,7 +112,7 @@ class App extends Component {
 	 */
 	render() {
 		const { cardsList, rootCardId, cardHistory } = this.state;
-		const activeCard = cardsList.find(card => card.id === rootCardId);
+		const rootCard = cardsList.find(card => card.id === rootCardId);
 		const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
 		const filteredHistory = cardHistory.filter(data => data.cardId === rootCardId);
 
@@ -124,14 +124,14 @@ class App extends Component {
 					onCardChange={rootCardId => this.onCardChange(rootCardId)}
 				/>
 				<CardPane>
-					<Header activeCard={activeCard} />
+					<Header rootCard={rootCard} />
 					<Workspace>
 						<History cardHistory={filteredHistory} />
 						<Prepaid
 							rootCardId={rootCardId}
 							inactiveCardsList={inactiveCardsList}
 						/>
-						<MobilePayment activeCard={activeCard} />
+						<MobilePayment rootCard={rootCard} />
 						<Withdraw
 							rootCardId={rootCardId}
 							inactiveCardsList={inactiveCardsList}

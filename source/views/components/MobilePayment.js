@@ -17,6 +17,14 @@ class MobilePayment extends Component {
 		this.state = { stage: 'contract' };
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (this.props.rootCard.id !== nextProps.rootCard.id) {
+			this.setState({
+				stage: 'contract'
+			});
+		}
+	}
+
 	/**
 	 * Обработка успешного платежа
 	 * @param {Object} transaction данные о транзакции
@@ -42,12 +50,11 @@ class MobilePayment extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const { activeCard } = this.props;
+		const { rootCard } = this.props;
 
 		if (this.state.stage === 'success') {
 			return (
 				<MobilePaymentSuccess
-					activeCard={activeCard}
 					transaction={this.state.transaction}
 					repeatPayment={() => this.repeatPayment()}
 				/>
@@ -56,7 +63,7 @@ class MobilePayment extends Component {
 
 		return (
 			<MobilePaymentContract
-				activeCard={activeCard}
+				rootCard={rootCard}
 				onPaymentSuccess={transaction => this.onPaymentSuccess(transaction)}
 			/>
 		);
@@ -64,7 +71,7 @@ class MobilePayment extends Component {
 }
 
 MobilePayment.propTypes = {
-	activeCard: PropTypes.shape({
+	rootCard: PropTypes.shape({
 		id: PropTypes.number,
 		theme: PropTypes.object
 	}).isRequired
