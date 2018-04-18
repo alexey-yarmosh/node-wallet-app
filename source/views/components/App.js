@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'react-emotion';
 import { injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
 import CardInfo from 'card-info';
 import { connect } from 'react-redux';
 
+import { switchCard } from './../actions';
 import {
 	CardsBar,
 	Header,
@@ -13,7 +14,6 @@ import {
 	MobilePayment,
 	Withdraw
 } from './';
-
 import './fonts.css';
 
 injectGlobal`
@@ -49,59 +49,42 @@ const Workspace = styled.div`
 /**
  * Приложение
  */
-class App extends Component {
-	/**
-	 * Обработчик переключения карты
-	 *
-	 * @param {Number} activeCardIndex индекс выбранной карты
-	 */
-	onCardChange(rootCardId) {
-		this.setState({ rootCardId });
-	}
+const App = ({ cardsList, rootCardId, cardHistory, onCardChange }) => {
+	const rootCard = cardsList.find(card => card.id === rootCardId);
+	const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
+	const filteredHistory = cardHistory.filter(data => data.cardId === rootCardId);
 
-	/**
-	 * Рендер компонента
-	 *
-	 * @override
-	 * @returns {JSX}
-	 */
-	render() {
-		const { cardsList, rootCardId, cardHistory } = this.props;
-		const rootCard = cardsList.find(card => card.id === rootCardId);
-		const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
-		const filteredHistory = cardHistory.filter(data => data.cardId === rootCardId);
-
-		return (
-			<Wallet>
-				<CardsBar
-					rootCardId={rootCardId}
-					cardsList={cardsList}
-					onCardChange={rootCardId => this.onCardChange(rootCardId)}
-				/>
-				<CardPane>
-					<Header rootCard={rootCard} />
-					<Workspace>
-						<History cardHistory={filteredHistory} />
-						<Prepaid
-							rootCardId={rootCardId}
-							inactiveCardsList={inactiveCardsList}
-						/>
-						<MobilePayment rootCard={rootCard} />
-						<Withdraw
-							rootCardId={rootCardId}
-							inactiveCardsList={inactiveCardsList}
-						/>
-					</Workspace>
-				</CardPane>
-			</Wallet>
-		);
-	}
-}
+	return (
+		<Wallet>
+			<CardsBar
+				rootCardId={rootCardId}
+				cardsList={cardsList}
+				onCardChange={rootCardId => onCardChange(rootCardId)}
+			/>
+			<CardPane>
+				<Header rootCard={rootCard} />
+				<Workspace>
+					<History cardHistory={filteredHistory} />
+					<Prepaid
+						rootCardId={rootCardId}
+						inactiveCardsList={inactiveCardsList}
+					/>
+					<MobilePayment rootCard={rootCard} />
+					<Withdraw
+						rootCardId={rootCardId}
+						inactiveCardsList={inactiveCardsList}
+					/>
+				</Workspace>
+			</CardPane>
+		</Wallet>
+	);
+};
 
 App.propTypes = {
 	rootCardId: PropTypes.number,
 	cardsList: PropTypes.array,
-	cardHistory: PropTypes.array
+	cardHistory: PropTypes.array,
+	onCardChange: PropTypes.func
 };
 
 /**
@@ -141,13 +124,17 @@ const mapStateToProps = state => {
 	});
 
 	return {
-		rootCardId: cardsList[0].id,
+		rootCardId: state.rootCardId,
 		cardsList,
 		cardHistory
 	};
 };
 
+const mapDispatchToProps = dispatch => ({
+	onCardChange: rootCardId => dispatch(switchCard(rootCardId))
+});
+
 export default connect(
 	mapStateToProps,
-	() => ({})
+	mapDispatchToProps
 )(App);
