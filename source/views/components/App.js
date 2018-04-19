@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'react-emotion';
 import { injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
-import CardInfo from 'card-info';
 import { connect } from 'react-redux';
 
-import { switchCard } from './../actions';
+import { prepareCardsData } from './../utils';
 import {
 	CardsBar,
 	Header,
@@ -49,22 +48,17 @@ const Workspace = styled.div`
 /**
  * Приложение
  */
-const App = ({ cardsList, rootCardId, cardHistory, onCardChange }) => {
+const App = ({ cardsList, rootCardId }) => {
 	const rootCard = cardsList.find(card => card.id === rootCardId);
 	const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
-	const filteredHistory = cardHistory.filter(data => data.cardId === rootCardId);
 
 	return (
 		<Wallet>
-			<CardsBar
-				rootCardId={rootCardId}
-				cardsList={cardsList}
-				onCardChange={rootCardId => onCardChange(rootCardId)}
-			/>
+			<CardsBar />
 			<CardPane>
-				<Header rootCard={rootCard} />
+				<Header />
 				<Workspace>
-					<History cardHistory={filteredHistory} />
+					<History />
 					<Prepaid
 						rootCardId={rootCardId}
 						inactiveCardsList={inactiveCardsList}
@@ -82,39 +76,8 @@ const App = ({ cardsList, rootCardId, cardHistory, onCardChange }) => {
 
 App.propTypes = {
 	rootCardId: PropTypes.number,
-	cardsList: PropTypes.array,
-	cardHistory: PropTypes.array,
-	onCardChange: PropTypes.func
+	cardsList: PropTypes.array
 };
-
-/**
- * Подготавливает данные карт
- *
- * @param {Object} cardsData данные карт
- * @returns {Object[]}
- */
-function prepareCardsData(cardsData) { // TODO 🔥: move to utils.js
-	return cardsData.map(card => {
-		const cardInfo = new CardInfo(card.cardNumber, {
-			banksLogosPath: '/assets/',
-			brandsLogosPath: '/assets/'
-		});
-
-		return {
-			id: card.id,
-			balance: card.balance,
-			number: cardInfo.numberNice,
-			bankName: cardInfo.bankName,
-			theme: {
-				bgColor: cardInfo.backgroundColor,
-				textColor: cardInfo.textColor,
-				bankLogoUrl: cardInfo.bankLogoSvg,
-				brandLogoUrl: cardInfo.brandLogoSvg,
-				bankSmLogoUrl: `/assets/${cardInfo.bankAlias}-history.svg`
-			}
-		};
-	});
-}
 
 const mapStateToProps = state => {
 	const cardsList = prepareCardsData(state.cards);
@@ -130,11 +93,6 @@ const mapStateToProps = state => {
 	};
 };
 
-const mapDispatchToProps = dispatch => ({
-	onCardChange: rootCardId => dispatch(switchCard(rootCardId))
-});
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+	mapStateToProps
 )(App);

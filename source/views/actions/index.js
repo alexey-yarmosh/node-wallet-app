@@ -1,4 +1,4 @@
-export const switchCard = id => ({
+export const switchRootCard = id => ({
   type: 'SWITCH_CARD',
   id
 });

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import { prepareCardsData } from './../utils';
 import PrepaidContract from './PrepaidContract';
 import PrepaidSuccess from './PrepaidSuccess';
 
-/**
- * Класс компонента Prepaid
- */
 class Prepaid extends Component {
-	/**
-	 * Конструктор
-	 * @param {Object} props свойства компонента Prepaid
-	 */
 	constructor(props) {
 		super(props);
 
@@ -44,10 +39,6 @@ class Prepaid extends Component {
 		this.setState({ stage: 'contract' });
 	}
 
-	/**
-	 * Функция отрисовки компонента
-	 * @returns {JSX}
-	 */
 	render() {
 		const { transaction, stage } = this.state;
 		const { rootCardId, inactiveCardsList } = this.props;
@@ -60,7 +51,7 @@ class Prepaid extends Component {
 
 		return (
 			<PrepaidContract
-			rootCardId={rootCardId}
+				rootCardId={rootCardId}
 				inactiveCardsList={inactiveCardsList}
 				onPaymentSuccess={transaction => this.onPaymentSuccess(transaction)}
 			/>
@@ -73,4 +64,11 @@ Prepaid.propTypes = {
 	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-export default Prepaid;
+const mapStateToProps = state => ({
+	rootCardId: state.rootCardId,
+	inactiveCardsList: prepareCardsData(state.cards.filter(card => card.id !== state.rootCardId))
+});
+
+export default connect(
+	mapStateToProps
+)(Prepaid);

@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
+import { prepareCardsData } from './../utils';
 import { Island } from './';
 
 const HistoryLayout = styled(Island)`
@@ -125,4 +127,18 @@ History.propTypes = {
 	cardHistory: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-export default History;
+const mapStateToProps = state => {
+	const cardsList = prepareCardsData(state.cards);
+	const cardHistory = state.transactions.map(transaction => {
+		const card = cardsList.find(card => card.id === transaction.cardId);
+		return card ? Object.assign({}, transaction, { card }) : transaction;
+	});
+
+	return {
+		cardHistory: cardHistory.filter(data => data.cardId === state.rootCardId)
+	};
+};
+
+export default connect(
+	mapStateToProps
+)(History);

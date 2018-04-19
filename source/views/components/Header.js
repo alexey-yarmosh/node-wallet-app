@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import { connect } from 'react-redux';
 import { Title, UserInfo } from './';
+import { prepareCardsData } from './../utils';
 
 const HeaderLayout = styled.header`
 	display: flex;
@@ -39,4 +41,11 @@ Header.propTypes = {
 	})
 };
 
-export default Header;
+const mapStateToProps = state => ({
+	rootCard: prepareCardsData(state.cards).find(card => card.id === state.rootCardId)
+});
+
+export default connect(
+	mapStateToProps
+)(Header);
+

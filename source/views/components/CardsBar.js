@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import { connect } from 'react-redux';
+
 import { Card } from './';
+import { switchRootCard } from './../actions';
+import { prepareCardsData } from './../utils';
 
 const Layout = styled.div`
 	display: flex;
@@ -36,34 +40,41 @@ const Footer = styled.footer`
 	font-size: 15px;
 `;
 
-const CardsBar = ({ rootCardId, cardsList, onCardChange }) => {
-	const onCardClick = rootCardId => {
-		onCardChange && onCardChange(rootCardId);
-	};
-	return (
-		<Layout>
-			<Logo />
-			<Edit />
-			<CardsList>
-				{cardsList.map((card, index) => (
-					<Card
-						key={index}
-						data={card}
-						active={card.id === rootCardId}
-						onClick={() => onCardClick(card.id)}
-					/>
-				))}
-				<Card type='new' />
-			</CardsList>
-			<Footer>Yamoney Node School</Footer>
-		</Layout>
-	);
-};
+const CardsBar = ({ rootCardId, cards, onCardChange }) => (
+	<Layout>
+		<Logo />
+		<Edit />
+		<CardsList>
+			{cards.map((card, index) => (
+				<Card
+					key={index}
+					data={card}
+					active={card.id === rootCardId}
+					onClick={() => onCardChange(card.id)}
+				/>
+			))}
+			<Card type='new' />
+		</CardsList>
+		<Footer>Yamoney Node School</Footer>
+	</Layout>
+);
 
 CardsBar.propTypes = {
-	cardsList: PropTypes.array.isRequired,
+	cards: PropTypes.array.isRequired,
 	rootCardId: PropTypes.number.isRequired,
 	onCardChange: PropTypes.func.isRequired
 };
 
-export default CardsBar;
+const mapStateToProps = state => ({
+	rootCardId: state.rootCardId,
+	cards: prepareCardsData(state.cards),
+});
+
+const mapDispatchToProps = dispatch => ({
+	onCardChange: rootCardId => dispatch(switchRootCard(rootCardId))
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(CardsBar);
