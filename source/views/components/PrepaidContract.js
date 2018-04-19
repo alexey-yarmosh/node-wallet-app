@@ -71,14 +71,13 @@ const Currency = styled.span`
 	color: #fff;
 `;
 
-/**
- * Класс компонента PrepaidContract
- */
 class PrepaidContract extends Component {
-	/**
-	 * Конструктор
-	 * @param {Object} props свойства компонента PrepaidContract
-	 */
+	static getDerivedStateFromProps(nextProps) {
+		return {
+			selectedCardId: nextProps.inactiveCardsList[0].id,
+		};
+	}
+
 	constructor(props) {
 		super(props);
 
@@ -87,13 +86,6 @@ class PrepaidContract extends Component {
 			sum: ''
 		};
 	}
-
-	componentWillReceiveProps(nextProps) {
-		this.setState({
-			selectedCardId: nextProps.inactiveCardsList[0].id,
-		});
-	}
-
 
 	/**
 	 * Изменения активной карты

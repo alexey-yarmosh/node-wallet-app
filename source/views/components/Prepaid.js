@@ -7,18 +7,17 @@ import PrepaidContract from './PrepaidContract';
 import PrepaidSuccess from './PrepaidSuccess';
 
 class Prepaid extends Component {
+	static getDerivedStateFromProps(nextProps, prevState) {
+		return (prevState.rootCardId !== nextProps.rootCardId) ? { stage: 'contract' } : null;
+	}
+
 	constructor(props) {
 		super(props);
 
-		this.state = { stage: 'contract' };
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.rootCardId !== nextProps.rootCardId) {
-			this.setState({
-				stage: 'contract'
-			});
-		}
+		this.state = {
+			stage: 'contract',
+			rootCardId: props.rootCardId
+		};
 	}
 
 	/**

@@ -39,22 +39,18 @@ const Currency = styled.span`
  * Класс компонента Withdraw
  */
 class Withdraw extends Component {
-	/**
-	 * Конструктор
-	 * @param {Object} props свойства компонента Withdraw
-	 */
+	static getDerivedStateFromProps(nextProps) {
+		return {
+			selectedCardId: nextProps.inactiveCardsList[0].id,
+		};
+	}
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			selectedCardId: props.inactiveCardsList[0].id,
 			sum: ''
 		};
-	}
-
-	componentWillReceiveProps(nextProps) {
-		this.setState({
-			selectedCardId: nextProps.inactiveCardsList[0].id,
-		});
 	}
 
 	/**

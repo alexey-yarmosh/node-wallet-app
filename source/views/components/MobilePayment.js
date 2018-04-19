@@ -1,28 +1,20 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import MobilePaymentContract from './MobilePaymentContract';
 import MobilePaymentSuccess from './MobilePaymentSuccess';
 
-/**
- * Класс компонента MobilePayment
- */
-class MobilePayment extends Component {
-	/**
-	 * Конструктор
-	 * @param {Object} props свойства компонента MobilePayment
-	 */
-	constructor(props) {
-		super(props);
-		this.state = { stage: 'contract' };
+class MobilePayment extends PureComponent {
+	static getDerivedStateFromProps(nextProps, prevState) {
+		return (prevState.rootCard !== nextProps.rootCard) ? { stage: 'contract' } : null;
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (this.props.rootCard.id !== nextProps.rootCard.id) {
-			this.setState({
-				stage: 'contract'
-			});
-		}
+	constructor(props) {
+		super(props);
+		this.state = {
+			stage: 'contract',
+			rootCard: props.rootCard
+		};
 	}
 
 	/**

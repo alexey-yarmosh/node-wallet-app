@@ -45,9 +45,6 @@ const Workspace = styled.div`
 	padding: 15px;
 `;
 
-/**
- * Приложение
- */
 const App = ({ cardsList, rootCardId }) => {
 	const rootCard = cardsList.find(card => card.id === rootCardId);
 	const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
