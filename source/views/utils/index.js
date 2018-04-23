@@ -6,7 +6,7 @@ import CardInfo from 'card-info';
  * @param {Object} cardsData данные карт
  * @returns {Object[]}
  */
-export function prepareCardsData(cardsData) { // TODO 🔥: move to utils.js
+export function prepareCardsData(cardsData) {
 	return cardsData.map(card => {
 		const cardInfo = new CardInfo(card.cardNumber, {
 			banksLogosPath: '/assets/',

@@ -26,7 +26,6 @@
     "node": "^8.2"
   },
   "dependencies": {
-    "card-info": "1.2.4",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
@@ -48,6 +47,7 @@
     "babel-plugin-import": "1.7.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "^6.24.1",
+    "card-info": "git+https://github.com/iniel/card-info.git",
     "cross-env": "5.1.4",
     "css-loader": "0.28.11",
     "emotion": "^8.0.12",
