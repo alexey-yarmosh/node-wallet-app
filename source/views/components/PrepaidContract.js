@@ -72,38 +72,15 @@ const Currency = styled.span`
 `;
 
 class PrepaidContract extends Component {
-	static getDerivedStateFromProps(nextProps) {
-		return {
-			selectedCardId: nextProps.inactiveCardsList[0].id,
-		};
-	}
-
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			selectedCardId: props.inactiveCardsList[0].id,
 			sum: ''
 		};
 	}
 
-	/**
-	 * Изменения активной карты
-	 * @param {Number} selectedCardId id активной карты
-	 */
-	onCardChange(selectedCardId) {
-		this.setState({ selectedCardId });
-	}
-
-	/**
-	 * Обработка изменения значения в input
-	 * @param {Event} event событие изменения значения input
-	 */
 	onChangeInputValue(event) {
-		if (!event) {
-			return;
-		}
-
 		const { name, value } = event.target;
 
 		this.setState({
@@ -111,42 +88,31 @@ class PrepaidContract extends Component {
 		});
 	}
 
-	/**
-	 * Отправка формы
-	 * @param {Event} event событие отправки формы
-	 */
 	onSubmitForm(event) {
-		if (event) {
-			event.preventDefault();
-		}
+		event.preventDefault();
+		// const { sum, selectedCardId } = this.state;
+		// const { rootCardId, inactiveCardsList } = this.props;
 
-		const { sum, selectedCardId } = this.state;
-		const { rootCardId, inactiveCardsList } = this.props;
+		// const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
+		// if (!isNumber || sum <= 0) {
+		// 	return;
+		// }
 
-		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
-		if (!isNumber || sum <= 0) {
-			return;
-		}
-
-		axios.post(`/cards/${selectedCardId}/card2CardPay`, { sum, targetCardId: rootCardId })
-			.then(() => {
-				this.setState({ sum: '' });
-				this.props.onPaymentSuccess({
-					sum,
-					number: inactiveCardsList.find(card => card.id === selectedCardId).number
-				});
-			});
+		// axios.post(`/cards/${selectedCardId}/card2CardPay`, { sum, targetCardId: rootCardId })
+		// 	.then(() => {
+		// 		this.setState({ sum: '' });
+		// 		this.props.onPaymentSuccess({
+		// 			sum,
+		// 			number: inactiveCardsList.find(card => card.id === selectedCardId).number
+		// 		});
+		// 	});
 	}
 
-	/**
-	 *
-	 * @returns {XML}
-	 */
 	render() {
-		const { inactiveCardsList } = this.props;
+		const { cardsList, onCardClick, prepaidCardId, rootCardId } = this.props;
+		const inactiveCardsList = cardsList.filter(card => card.id !== rootCardId);
 
-		const { selectedCardId } = this.state;
-		const selectedCard = inactiveCardsList.find(card => card.id === selectedCardId);
+		const selectedCard = cardsList.find(card => card.id === prepaidCardId);
 
 		return (
 			<form onSubmit={event => this.onSubmitForm(event)}>
@@ -159,21 +125,21 @@ class PrepaidContract extends Component {
 								<PrepaidItem
 									bgColor={card.theme.bgColor}
 									key={card.id}
-									onClick={() => this.onCardChange(card.id)}
-									selected={selectedCardId === card.id}
+									onClick={() => onCardClick(card.id)}
+									selected={prepaidCardId === card.id}
 								>
 									<PrepaidItemIcon
 										bankSmLogoUrl={card.theme.bankSmLogoUrl}
-										selected={selectedCardId === card.id}
+										selected={prepaidCardId === card.id}
 									/>
 									<PrepaidItemTitle
 										textColor={card.theme.textColor}
-										selected={selectedCardId === card.id}
+										selected={prepaidCardId === card.id}
 									>
 										C карты
 										<PrepaidItemDescription
 											textColor={card.theme.textColor}
-											selected={selectedCardId === card.id}
+											selected={prepaidCardId === card.id}
 										>
 											{card.number}
 										</PrepaidItemDescription>
@@ -206,8 +172,10 @@ class PrepaidContract extends Component {
 
 PrepaidContract.propTypes = {
 	rootCardId: PropTypes.number.isRequired,
-	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-	onPaymentSuccess: PropTypes.func.isRequired
+	prepaidCardId: PropTypes.number.isRequired,
+	cardsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onPaymentSuccess: PropTypes.func.isRequired,
+	onCardClick: PropTypes.func.isRequired,
 };
 
 export default PrepaidContract;

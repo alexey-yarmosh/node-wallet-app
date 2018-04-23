@@ -3,46 +3,39 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { prepareCardsData } from './../utils';
+import { changePrepaidId } from '../actions';
 import PrepaidContract from './PrepaidContract';
 import PrepaidSuccess from './PrepaidSuccess';
 
 class Prepaid extends Component {
 	static getDerivedStateFromProps(nextProps, prevState) {
-		return (prevState.rootCardId !== nextProps.rootCardId) ? { stage: 'contract' } : null;
+		return (prevState.rootCardId !== nextProps.rootCardId) ? { status: 'contract' } : null;
 	}
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			stage: 'contract',
-			rootCardId: props.rootCardId
+			status: 'contract'
 		};
 	}
 
-	/**
-	 * Обработка успешного платежа
-	 * @param {Object} transaction данные о транзакции
-	 */
 	onPaymentSuccess(transaction) {
 		this.setState({
-			stage: 'success',
+			status: 'success',
 			transaction
 		});
 	}
 
-	/**
-	 * Повторить платеж
-	 */
 	repeatPayment() {
-		this.setState({ stage: 'contract' });
+		this.setState({ status: 'contract' });
 	}
 
 	render() {
-		const { transaction, stage } = this.state;
-		const { rootCardId, inactiveCardsList } = this.props;
+		const { transaction, status } = this.state;
+		const { rootCardId, cardsList, onCardClick, prepaidCardId } = this.props;
 
-		if (stage === 'success') {
+		if (status === 'success') {
 			return (
 				<PrepaidSuccess transaction={transaction} repeatPayment={() => this.repeatPayment()} />
 			);
@@ -51,7 +44,9 @@ class Prepaid extends Component {
 		return (
 			<PrepaidContract
 				rootCardId={rootCardId}
-				inactiveCardsList={inactiveCardsList}
+				prepaidCardId={prepaidCardId}
+				cardsList={cardsList}
+				onCardClick={onCardClick}
 				onPaymentSuccess={transaction => this.onPaymentSuccess(transaction)}
 			/>
 		);
@@ -60,14 +55,22 @@ class Prepaid extends Component {
 
 Prepaid.propTypes = {
 	rootCardId: PropTypes.number.isRequired,
-	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired
+	prepaidCardId: PropTypes.number.isRequired,
+	cardsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onCardClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
 	rootCardId: state.rootCardId,
-	inactiveCardsList: prepareCardsData(state.cards.filter(card => card.id !== state.rootCardId))
+	prepaidCardId: state.prepaidData.id,
+	cardsList: prepareCardsData(state.cards)
+});
+
+const mapDispatchToProps = dispatch => ({
+	onCardClick: cardId => dispatch(changePrepaidId(cardId))
 });
 
 export default connect(
-	mapStateToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(Prepaid);
