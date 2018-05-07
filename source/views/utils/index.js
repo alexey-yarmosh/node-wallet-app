@@ -1,4 +1,5 @@
 import CardInfo from 'card-info';
+import axios from 'axios';
 
 /**
  * Подготавливает данные карт
@@ -27,4 +28,9 @@ export function prepareCardsData(cardsData) {
 			}
 		};
 	});
+}
+
+export function card2CardSubmit({ fromId, toId, sum }) {
+	return axios.post(`/cards/${fromId}/card2CardPay`, { sum, toId })
+		.then(res => res.data);
 }

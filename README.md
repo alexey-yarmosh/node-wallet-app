@@ -9,14 +9,14 @@ Application allows manage cards of different banks. Add new cards, make payments
 
 ## TODO:
 
-* when switch rootCard default Prepaid card has bug
+* add 'pending' spinner
 * finish redux client migration
 * apply async redux actions
 * hot update history
+* back & front data sync
 * MobilePayment gets rootCard color
-* backend input validation
 * make webpack generate assets
 * how new works?
-* mongoose db
-* tests
+* add db
 * login
+* tests

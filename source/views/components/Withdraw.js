@@ -86,7 +86,7 @@ class Withdraw extends Component {
 			return;
 		}
 
-		axios.post(`/cards/${rootCardId}/card2CardPay`, { sum, targetCardId: selectedCardId })
+		axios.post(`/cards/${rootCardId}/card2CardPay`, { sum, toId: selectedCardId })
 			.then(() => {
 				this.setState({ sum: '' });
 			});

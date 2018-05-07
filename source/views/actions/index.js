@@ -5,7 +5,18 @@ export const switchRootCard = id => ({
   id
 });
 
+export const card2CardSubmit = data => ({
+  type: 'CARD_2_CARD_SUBMIT',
+  data
+});
+
 // Prepaid actions
+
+export const addLastTransaction = (id, sum) => ({
+  type: 'ADD_LAST_TRANSACTION',
+  id,
+  sum
+});
 
 export const changePrepaidStatus = status => ({
   type: 'CHANGE_PREPAID_STATUS',

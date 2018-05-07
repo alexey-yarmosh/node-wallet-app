@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import { connect } from 'react-redux';
 
 import { Card } from './';
-import { switchRootCard } from './../actions';
+import { switchRootCard, changePrepaidStatus } from './../actions';
 import { prepareCardsData } from './../utils';
 
 const Layout = styled.div`
@@ -71,7 +71,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	onCardChange: rootCardId => dispatch(switchRootCard(rootCardId))
+	onCardChange: rootCardId => { // TODO🔥: should implement something like RESET_MAIN_SECTION action
+		dispatch(switchRootCard(rootCardId));
+		dispatch(changePrepaidStatus('contract'));
+	}
 });
 
 export default connect(

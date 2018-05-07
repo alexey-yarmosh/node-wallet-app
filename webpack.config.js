@@ -17,7 +17,9 @@ module.exports = [
     name: 'client',
     devtool: 'eval',
     watch: true,
-    entry: './source/views/index.client.js',
+    entry: {
+      main: ['babel-polyfill', './source/views/index.client.js']
+    },
     output: {
       path: path.resolve(__dirname, 'public'),
       filename: 'bundle.client.js'

@@ -62,7 +62,7 @@ const RepeatPayment = styled.button`
 `;
 
 const PrepaidSuccess = ({ transaction, repeatPayment }) => {
-	const { sum, number } = transaction;
+	const { sum, id } = transaction;
 
 	return (
 		<PrepaidLayout>
@@ -75,7 +75,7 @@ const PrepaidSuccess = ({ transaction, repeatPayment }) => {
 				</Section>
 				<Section>
 					<SectionLabel>Карта с которой пополнили:</SectionLabel>
-					<SectionValue>{number}</SectionValue>
+					<SectionValue>{id}</SectionValue>
 				</Section>
 				<Section>
 					<SectionLabel>Сумма:</SectionLabel>
@@ -89,9 +89,9 @@ const PrepaidSuccess = ({ transaction, repeatPayment }) => {
 
 PrepaidSuccess.propTypes = {
 	transaction: PropTypes.shape({
-		sum: PropTypes.string,
-		number: PropTypes.string
-	}).isRequired,
+		sum: PropTypes.number,
+		id: PropTypes.string
+	}),
 	repeatPayment: PropTypes.func.isRequired
 };
 
