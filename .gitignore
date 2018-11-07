@@ -1,6 +1,6 @@
-public/bundle.client.js
+# public/bundle.client.js
 public/styles.css
-source/views/bundle.server.js
+# source/views/bundle.server.js
 node_modules/
 .DS_Store
 Thumbs.db
