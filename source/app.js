@@ -42,7 +42,7 @@ async function getData(ctx) {
 
 // Сохраним параметр id в ctx.params.id
 router.param('id', (id, ctx, next) => next());
-router.get('/', async ctx => {
+router.get(['/', '/history'], async ctx => {
 	const data = await getData(ctx);
 	const indexView = getView('bundle');
 	const indexViewHtml = renderToStaticMarkup(indexView(data));

@@ -4,7 +4,7 @@ Application allows manage cards of different banks. Add new cards, make payments
 ## How to start
 1. `npm i` - install packages
 2. `npm run build` - build bundles
-3. `npm start` - start app
+3. `npm start` - start server
 4. go to `localhost:3000`
 
 ## TODO:
