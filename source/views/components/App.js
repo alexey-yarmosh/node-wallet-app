@@ -6,15 +6,11 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { prepareCardsData } from './../utils'
-import { Home } from './../containers'
+import { Home, History, Prepaid, Withdraw, Mobile } from './../containers'
 import {
 	CardsBar,
 	Header,
-	Navigation,
-	History,
-	Prepaid,
-	MobilePayment,
-	Withdraw
+	Navigation
 } from './'
 import './fonts.css'
 
@@ -44,7 +40,7 @@ const CardPane = styled.div`
 const Workspace = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	max-width: 970px;
+	max-width: 1060px;
 	padding: 15px;
 `
 
@@ -62,7 +58,7 @@ const App = ({ cardsList, rootCardId }) => {
 					<Workspace>
 						<Route exact path='/history' component={History} />
 						<Route exact path='/prepaid' render={() => <Prepaid inactiveCardsList={inactiveCardsList} />} />
-						<Route exact path='/mobile-payment' render={() => <MobilePayment rootCard={rootCard} />} />
+						<Route exact path='/mobile-payment' render={() => <Mobile rootCard={rootCard} />} />
 						<Route exact path='/withdraw' render={() => <Withdraw rootCardId={rootCardId} inactiveCardsList={inactiveCardsList} />} />
 						<Route exact path='/' render={() => <Home rootCard={rootCard} inactiveCardsList={inactiveCardsList} />} />
 					</Workspace>
