@@ -10,7 +10,7 @@
     "debug": "node --inspect-brk source/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "reset": "node libs/reset-data",
-    "precommit": "npm run reset"
+    "precommit": "npm run reset && git add ."
   },
   "nodemonConfig": {
     "ignore": [
