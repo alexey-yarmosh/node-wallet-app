@@ -34,7 +34,8 @@ module.exports = {
     'consistent-return': 0,
     'no-underscore-dangle': 0,
     'function-paren-newline': 0,
-    
+    'semi': ['error', 'never'],
+
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,

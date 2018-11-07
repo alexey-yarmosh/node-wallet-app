@@ -1,14 +1,16 @@
 import React, { Fragment } from 'react';
-import styled from 'react-emotion';
+import styled from 'react-emotion'
 import { injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { prepareCardsData } from './../utils';
+import { Home } from './../containers'
 import {
 	CardsBar,
 	Header,
+	Navigation,
 	History,
 	Prepaid,
 	MobilePayment,
@@ -55,29 +57,14 @@ const App = ({ cardsList, rootCardId }) => {
 			<Wallet>
 				<CardsBar />
 				<CardPane>
-					<nav>
-						<Link to='/'>Home</Link>
-						<Link to='/history'>History</Link>
-					</nav>
+					<Navigation />
 					<Header />
 					<Workspace>
 						<Route exact path='/history' component={History} />
-						<Route
-							exact
-							path='/'
-							render={() => (
-							<Fragment>
-								<History />
-								<Prepaid
-									inactiveCardsList={inactiveCardsList}
-								/>
-								<MobilePayment rootCard={rootCard} />
-								<Withdraw
-									rootCardId={rootCardId}
-									inactiveCardsList={inactiveCardsList}
-								/>
-							</Fragment>
-						)} />
+						<Route exact path='/prepaid' render={() => <Prepaid inactiveCardsList={inactiveCardsList} />} />
+						<Route exact path='/mobile-payment' render={() => <MobilePayment rootCard={rootCard} />} />
+						<Route exact path='/withdraw' render={() => <Withdraw rootCardId={rootCardId} inactiveCardsList={inactiveCardsList} />} />
+						<Route exact path='/' render={() => <Home rootCard={rootCard} inactiveCardsList={inactiveCardsList} />} />
 					</Workspace>
 				</CardPane>
 			</Wallet>
