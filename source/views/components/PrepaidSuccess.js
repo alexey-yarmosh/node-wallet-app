@@ -93,7 +93,10 @@ PrepaidSuccess.propTypes = {
 			PropTypes.number,
 			PropTypes.string
 		]),
-		id: PropTypes.string
+		id: PropTypes.oneOfType([
+			PropTypes.number,
+			PropTypes.string
+		])
 	}),
 	repeatPayment: PropTypes.func.isRequired
 };

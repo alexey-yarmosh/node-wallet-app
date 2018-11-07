@@ -1,6 +1,5 @@
 import React from 'react';
-import { hydrate as hydrateReact } from 'react-dom';
-import { hydrate as hydrateEmotion } from 'emotion';
+import { render } from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
@@ -14,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 const create = window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore;
 const createStoreWithMiddleware = applyMiddleware(sagaMiddleware)(create);
 
-const { ids, initData } = window.__data;
+const { initData } = window.__data;
 const initState = {
   cards: initData.cards,
   transactions: initData.transactions
@@ -25,8 +24,7 @@ const store = createStoreWithMiddleware(rootReducer, initState);
 
 sagaMiddleware.run(mySaga);
 
-hydrateEmotion(ids);
-hydrateReact(
+render(
   <Provider store={store}>
     <App />
   </Provider>,

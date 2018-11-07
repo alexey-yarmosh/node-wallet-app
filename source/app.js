@@ -3,6 +3,7 @@ const bodyParser = require('koa-bodyparser')();
 const router = require('koa-router')();
 const serve = require('koa-static');
 const path = require('path');
+
 const { renderToStaticMarkup } = require('react-dom/server');
 const logger = require('../libs/logger')('wallet-app');
 const errorHandler = require('../libs/error-handler');
