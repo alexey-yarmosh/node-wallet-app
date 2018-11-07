@@ -89,7 +89,10 @@ const PrepaidSuccess = ({ transaction, repeatPayment }) => {
 
 PrepaidSuccess.propTypes = {
 	transaction: PropTypes.shape({
-		sum: PropTypes.number,
+		sum: PropTypes.oneOfType([
+			PropTypes.number,
+			PropTypes.string
+		]),
 		id: PropTypes.string
 	}),
 	repeatPayment: PropTypes.func.isRequired

@@ -57,7 +57,6 @@ const App = ({ cardsList, rootCardId }) => {
 				<Workspace>
 					<History />
 					<Prepaid
-						rootCardId={rootCardId}
 						inactiveCardsList={inactiveCardsList}
 					/>
 					<MobilePayment rootCard={rootCard} />
