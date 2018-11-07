@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import axios from 'axios';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
+import axios from 'axios'
 
-import { COMISSION } from '../../constants';
-import { Island, Title, Button, Input } from './';
+import { COMISSION } from '../../constants'
+import { Island, Title, Button, Input } from './'
 
 const MobilePaymentLayout = styled(Island)`
 	width: 440px;
 	background: #108051;
-`;
+`
 
 const MobilePaymentTitle = styled(Title)`
 	color: #fff;
-`;
+`
 
 const InputField = styled.div`
 	display: flex;
@@ -21,52 +21,52 @@ const InputField = styled.div`
 	margin-bottom: 26px;
 	position: relative;
 	padding-left: 150px;
-`;
+`
 
 const Label = styled.div`
 	font-size: 15px;
 	color: #fff;
 	position: absolute;
 	left: 0;
-`;
+`
 
 const Currency = styled.span`
 	font-size: 13px;
 	color: #fff;
 	margin-left: 12px;
-`;
+`
 
 const Commission = styled.div`
 	color: rgba(255, 255, 255, 0.6);
 	font-size: 13px;
 	text-align: right;
 	margin: 35px 0 20px;
-`;
+`
 
 const Underline = styled.div`
 	height: 1px;
 	margin-bottom: 20px;
 	background-color: rgba(0, 0, 0, 0.16);
-`;
+`
 
 const PaymentButton = styled(Button)`
 	float: right;
-`;
+`
 
 const InputPhoneNumber = styled(Input)`
 	width: 225px;
-`;
+`
 
 const InputSum = styled(Input)`
 	width: 160px;
-`;
+`
 
 const InputCommision = styled(Input)`
 	cursor: no-drop;
 	width: 160px;
 	border: dotted 1.5px rgba(0, 0, 0, 0.2);
 	background-color: initial;
-`;
+`
 
 /**
  * Компонент MobilePaymentContract
@@ -77,12 +77,12 @@ class MobilePaymentContract extends Component {
 	 * @param {Object} props свойства компонента MobilePaymentContract
 	 */
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			phoneNumber: '+375259350212',
 			sum: 0,
 			commission: COMISSION
-		};
+		}
 	}
 
 	/**
@@ -90,14 +90,14 @@ class MobilePaymentContract extends Component {
 	 * @returns {Number}
 	 */
 	getSumWithCommission() {
-		const { sum, commission } = this.state;
+		const { sum, commission } = this.state
 
-		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
+		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum)
 		if (!isNumber || sum <= 0) {
-			return 0;
+			return 0
 		}
 
-		return Number(sum) + Number(commission);
+		return Number(sum) + Number(commission)
 	}
 
 	/**
@@ -106,23 +106,23 @@ class MobilePaymentContract extends Component {
 	 */
 	handleSubmit(event) {
 		if (event) {
-			event.preventDefault();
+			event.preventDefault()
 		}
 
-		const { sum, phoneNumber, commission } = this.state;
+		const { sum, phoneNumber, commission } = this.state
 
-		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
+		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum)
 		if (!isNumber || sum <= 0) {
-			return;
+			return
 		}
 
-		const { rootCard } = this.props;
+		const { rootCard } = this.props
 
 		axios.post(`/cards/${rootCard.id}/mobilePay`, { sum, data: phoneNumber })
 		.then(response => {
-			const { sum, data } = response.data;
-			this.props.onPaymentSuccess({ sum, phoneNumber: data, commission });
-		});
+			const { sum, data } = response.data
+			this.props.onPaymentSuccess({ sum, phoneNumber: data, commission })
+		})
 	}
 
 	/**
@@ -131,14 +131,14 @@ class MobilePaymentContract extends Component {
 	 */
 	handleInputChange(event) {
 		if (!event) {
-			return;
+			return
 		}
 
-		const { name, value } = event.target;
+		const { name, value } = event.target
 
 		this.setState({
 			[name]: value
-		});
+		})
 	}
 
 	/**
@@ -148,7 +148,7 @@ class MobilePaymentContract extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const { commission } = this.state;
+		const { commission } = this.state
 
 		return (
 			<MobilePaymentLayout>
@@ -184,7 +184,7 @@ class MobilePaymentContract extends Component {
 					<PaymentButton bgColor='#fff' textColor='#108051'>Заплатить</PaymentButton>
 				</form>
 			</MobilePaymentLayout>
-		);
+		)
 	}
 }
 
@@ -193,6 +193,6 @@ MobilePaymentContract.propTypes = {
 		id: PropTypes.number
 	}).isRequired,
 	onPaymentSuccess: PropTypes.func.isRequired
-};
+}
 
-export default MobilePaymentContract;
+export default MobilePaymentContract

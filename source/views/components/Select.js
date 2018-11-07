@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'react-emotion';
-import { Select as AntdSelect } from 'antd';
+import React from 'react'
+import styled from 'react-emotion'
+import { Select as AntdSelect } from 'antd'
 
 const StyledSelect = styled(AntdSelect)`
 	&.ant-select {
@@ -26,12 +26,12 @@ const StyledSelect = styled(AntdSelect)`
 			font-size: 15px;
 		}
 	}
-`;
+`
 
 const Select = props => (
 	<StyledSelect {...props} />
-);
+)
 
-Select.Option = AntdSelect.Option;
+Select.Option = AntdSelect.Option
 
-export default Select;
+export default Select

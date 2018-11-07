@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import { connect } from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
+import { connect } from 'react-redux'
 
-import { Card } from './';
-import { switchRootCard, changePrepaidStatus } from './../actions';
-import { prepareCardsData } from './../utils';
+import { Card } from './'
+import { switchRootCard, changePrepaidStatus } from './../actions'
+import { prepareCardsData } from './../utils'
 
 const Layout = styled.div`
 	display: flex;
@@ -13,14 +13,14 @@ const Layout = styled.div`
 	position: relative;
 	background-color: #242424;
 	padding: 20px;
-`;
+`
 
 const Logo = styled.div`
 	width: 147px;
 	height: 28px;
 	margin-bottom: 55px;
 	background-image: url('/assets/yamoney-logo.svg');
-`;
+`
 
 const Edit = styled.div`
 	position: absolute;
@@ -29,16 +29,16 @@ const Edit = styled.div`
 	width: 18px;
 	height: 18px;
 	background-image: url('/assets/cards-edit.svg');
-`;
+`
 
 const CardsList = styled.div`
 	flex: 1;
-`;
+`
 
 const Footer = styled.footer`
 	color: rgba(255, 255, 255, 0.2);
 	font-size: 15px;
-`;
+`
 
 const CardsBar = ({ rootCardId, cards, onCardChange }) => (
 	<Layout>
@@ -57,27 +57,27 @@ const CardsBar = ({ rootCardId, cards, onCardChange }) => (
 		</CardsList>
 		<Footer>Yamoney Node School</Footer>
 	</Layout>
-);
+)
 
 CardsBar.propTypes = {
 	cards: PropTypes.array.isRequired,
 	rootCardId: PropTypes.number.isRequired,
 	onCardChange: PropTypes.func.isRequired
-};
+}
 
 const mapStateToProps = state => ({
 	rootCardId: state.rootCardId,
 	cards: prepareCardsData(state.cards),
-});
+})
 
 const mapDispatchToProps = dispatch => ({
 	onCardChange: rootCardId => { // TODO🔥: should implement something like RESET_MAIN_SECTION action
-		dispatch(switchRootCard(rootCardId));
-		dispatch(changePrepaidStatus('contract'));
+		dispatch(switchRootCard(rootCardId))
+		dispatch(changePrepaidStatus('contract'))
 	}
-});
+})
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CardsBar);
+)(CardsBar)

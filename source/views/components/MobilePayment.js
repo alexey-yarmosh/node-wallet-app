@@ -1,20 +1,20 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-import MobilePaymentContract from './MobilePaymentContract';
-import MobilePaymentSuccess from './MobilePaymentSuccess';
+import MobilePaymentContract from './MobilePaymentContract'
+import MobilePaymentSuccess from './MobilePaymentSuccess'
 
 class MobilePayment extends PureComponent {
 	static getDerivedStateFromProps(nextProps, prevState) {
-		return (prevState.rootCard !== nextProps.rootCard) ? { stage: 'contract' } : null;
+		return (prevState.rootCard !== nextProps.rootCard) ? { stage: 'contract' } : null
 	}
 
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			stage: 'contract',
 			rootCard: props.rootCard
-		};
+		}
 	}
 
 	/**
@@ -25,14 +25,14 @@ class MobilePayment extends PureComponent {
 		this.setState({
 			stage: 'success',
 			transaction
-		});
+		})
 	}
 
 	/**
 	 * Повторить платеж
 	 */
 	repeatPayment() {
-		this.setState({ stage: 'contract' });
+		this.setState({ stage: 'contract' })
 	}
 
 	/**
@@ -42,7 +42,7 @@ class MobilePayment extends PureComponent {
 	 * @returns {JSX}
 	 */
 	render() {
-		const { rootCard } = this.props;
+		const { rootCard } = this.props
 
 		if (this.state.stage === 'success') {
 			return (
@@ -50,7 +50,7 @@ class MobilePayment extends PureComponent {
 					transaction={this.state.transaction}
 					repeatPayment={() => this.repeatPayment()}
 				/>
-			);
+			)
 		}
 
 		return (
@@ -58,7 +58,7 @@ class MobilePayment extends PureComponent {
 				rootCard={rootCard}
 				onPaymentSuccess={transaction => this.onPaymentSuccess(transaction)}
 			/>
-		);
+		)
 	}
 }
 
@@ -67,6 +67,6 @@ MobilePayment.propTypes = {
 		id: PropTypes.number,
 		theme: PropTypes.object
 	}).isRequired
-};
+}
 
-export default MobilePayment;
+export default MobilePayment

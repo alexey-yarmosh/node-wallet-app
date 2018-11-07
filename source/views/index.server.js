@@ -1,8 +1,8 @@
-import React from 'react';
-import serialize from 'serialize-javascript';
+import React from 'react'
+import serialize from 'serialize-javascript'
 
 module.exports = initData => {
-	const viewData = `window.__data=${serialize({ initData })};`;
+	const viewData = `window.__data=${serialize({ initData })};`
 	return (
 		<html lang='ru'>
 			<head>
@@ -17,5 +17,5 @@ module.exports = initData => {
 				<script src='bundle.client.js' />
 			</body>
 		</html>
-	);
-};
+	)
+}

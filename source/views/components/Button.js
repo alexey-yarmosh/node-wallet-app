@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
 
 const StyledButton = styled.button`
 	height: 36px;
@@ -18,7 +18,7 @@ const StyledButton = styled.button`
 		color: ${({ textColor }) => textColor || 'rgba(0, 0, 0, 0.65)'};
 		background-color: ${({ bgColor }) => bgColor || 'rgba(0, 0, 0, 0.05)'};
 	}
-`;
+`
 
 const Button = ({
  bgColor, textColor, children, className
@@ -26,13 +26,13 @@ const Button = ({
 	<StyledButton bgColor={bgColor} textColor={textColor} className={className}>
 		{children}
 	</StyledButton>
-);
+)
 
 Button.propTypes = {
 	bgColor: PropTypes.string,
 	textColor: PropTypes.string,
 	children: PropTypes.node,
 	className: PropTypes.string
-};
+}
 
-export default Button;
+export default Button

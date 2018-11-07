@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import { Select } from './';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
+import { Select } from './'
 
 const CardLayout = styled.div`
 	cursor: pointer;
@@ -13,7 +13,7 @@ const CardLayout = styled.div`
 	padding: 25px 20px 20px 25px;
 	border-radius: 4px;
 	background-color: ${({ bgColor, active }) => (active ? bgColor : 'rgba(255, 255, 255, 0.1)')};
-`;
+`
 
 const CardLogo = styled.div`
 	height: 28px;
@@ -22,14 +22,14 @@ const CardLogo = styled.div`
 	background-size: contain;
 	background-repeat: no-repeat;
 	filter: ${({ active }) => (active ? 'none' : 'grayscale(100%) opacity(60%)')};
-`;
+`
 
 const CardNumber = styled.div`
 	margin-bottom: 20px;
 	color: ${({ active, textColor }) => (active ? textColor : 'rgba(255, 255, 255, 0.6)')};
 	font-size: 16px;
 	font-family: 'OCR A Std Regular';
-`;
+`
 
 const CardType = styled.div`
 	height: 26px;
@@ -38,7 +38,7 @@ const CardType = styled.div`
 	background-repeat: no-repeat;
 	background-position-x: right;
 	opacity: ${({ active }) => (active ? '1' : '0.6')};
-`;
+`
 
 const NewCardLayout = styled(CardLayout)`
 	background-color: transparent;
@@ -47,28 +47,28 @@ const NewCardLayout = styled(CardLayout)`
 	background-position: center;
 	box-sizing: border-box;
 	border: 2px dashed rgba(255, 255, 255, 0.2);
-`;
+`
 
 const CardSelect = styled(Select)`
 	width: 100%;
 	margin-bottom: 15px;
-`;
+`
 
 /**
  * Карта
  */
 function Card(props) {
-	const { data, type, active, onClick, selectedCardId, onCardChange } = props;
+	const { data, type, active, onClick, selectedCardId, onCardChange } = props
 
 	if (type === 'new') {
 		return (
 			<NewCardLayout />
-		);
+		)
 	}
 
 	if (type === 'select') {
-		const activeCard = data.find(card => card.id === selectedCardId);
-		const { bgColor, bankLogoUrl, brandLogoUrl } = activeCard.theme;
+		const activeCard = data.find(card => card.id === selectedCardId)
+		const { bgColor, bankLogoUrl, brandLogoUrl } = activeCard.theme
 
 		return (
 			<CardLayout active bgColor={bgColor}>
@@ -80,12 +80,12 @@ function Card(props) {
 				</CardSelect>
 				<CardType url={brandLogoUrl} active />
 			</CardLayout>
-		);
+		)
 	}
 
-	const { number, theme } = data;
-	const { bgColor, textColor, bankLogoUrl, brandLogoUrl } = theme;
-	const themedBrandLogoUrl = active ? brandLogoUrl : brandLogoUrl.replace(/-colored.svg$/, '-white.svg');
+	const { number, theme } = data
+	const { bgColor, textColor, bankLogoUrl, brandLogoUrl } = theme
+	const themedBrandLogoUrl = active ? brandLogoUrl : brandLogoUrl.replace(/-colored.svg$/, '-white.svg')
 
 	return (
 		<CardLayout active={active} bgColor={bgColor} onClick={onClick} >
@@ -95,7 +95,7 @@ function Card(props) {
 			</CardNumber>
 			<CardType url={themedBrandLogoUrl} active={active} />
 		</CardLayout>
-	);
+	)
 }
 
 Card.propTypes = {
@@ -105,6 +105,6 @@ Card.propTypes = {
 	active: PropTypes.bool,
 	onClick: PropTypes.func,
 	onCardChange: PropTypes.func
-};
+}
 
-export default Card;
+export default Card

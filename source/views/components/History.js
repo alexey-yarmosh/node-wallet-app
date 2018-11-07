@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import moment from 'moment';
-import { connect } from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
+import moment from 'moment'
+import { connect } from 'react-redux'
 
-import { prepareCardsData } from './../utils';
-import { Island } from './';
+import { prepareCardsData } from './../utils'
+import { Island } from './'
 
 const HistoryLayout = styled(Island)`
 	width: 530px;
@@ -13,7 +13,7 @@ const HistoryLayout = styled(Island)`
 	overflow-y: scroll;
 	padding: 0;
 	background-color: rgba(0, 0, 0, 0.05);
-`;
+`
 
 const HistoryTitle = styled.div`
 	padding-left: 12px;
@@ -21,7 +21,7 @@ const HistoryTitle = styled.div`
 	font-size: 15px;
 	line-height: 30px;
 	text-transform: uppercase;
-`;
+`
 
 const HistoryItem = styled.div`
 	display: flex;
@@ -38,7 +38,7 @@ const HistoryItem = styled.div`
 	&:nth-child(odd) {
 		background-color: rgba(255, 255, 255, 0.72);
 	}
-`;
+`
 
 const HistoryItemIcon = styled.div`
 	width: 50px;
@@ -48,62 +48,62 @@ const HistoryItemIcon = styled.div`
 	background-image: url(${({ bankSmLogoUrl }) => bankSmLogoUrl});
 	background-size: contain;
 	background-repeat: no-repeat;
-`;
+`
 
 const HistoryItemTitle = styled.div`
 	width: 290px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-`;
+`
 
 const HistoryItemTime = styled.div`
 	width: 50px;
-`;
+`
 
 const HistoryItemSum = styled.div`
 	width: 50px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-`;
+`
 
 const sumToString = item => {
 	if (item.sum > 0) {
-		return `+${item.sum}$`;
+		return `+${item.sum}$`
 	} else {
-		return `${item.sum}$`;
+		return `${item.sum}$`
 	}
-};
+}
 
 const History = ({ cardHistory }) => {
 	const getHistoryItemTitle = item => {
-		let typeTitle = '';
+		let typeTitle = ''
 
 		switch (item.type) {
 			case 'paymentMobile': {
-				typeTitle = 'Оплата телефона';
-				break;
+				typeTitle = 'Оплата телефона'
+				break
 			}
 			case 'prepaidCard': {
-				typeTitle = 'Пополнение c карты';
-				break;
+				typeTitle = 'Пополнение c карты'
+				break
 			}
 			case 'withdrawCard': {
-				typeTitle = 'Перевод на карту';
-				break;
+				typeTitle = 'Перевод на карту'
+				break
 			}
 			default: {
-				typeTitle = 'Операция';
+				typeTitle = 'Операция'
 			}
 		}
 
-		return `${typeTitle} ${item.data}`;
-	};
+		return `${typeTitle} ${item.data}`
+	}
 
 	return (
 		<HistoryLayout>
 			<HistoryTitle>Операции</HistoryTitle>
 			{cardHistory.map((item, index) => {
-				const historyItemDate = moment(item.time, moment.ISO_8601);
+				const historyItemDate = moment(item.time, moment.ISO_8601)
 				return (
 					<HistoryItem key={index}>
 						<HistoryItemIcon bankSmLogoUrl={item.card.theme.bankSmLogoUrl} />
@@ -117,28 +117,28 @@ const History = ({ cardHistory }) => {
 							{`${sumToString(item)}`}
 						</HistoryItemSum>
 					</HistoryItem>
-				);
+				)
 			})}
 		</HistoryLayout>
-	);
-};
+	)
+}
 
 History.propTypes = {
 	cardHistory: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+}
 
 const mapStateToProps = state => {
-	const cardsList = prepareCardsData(state.cards);
+	const cardsList = prepareCardsData(state.cards)
 	const cardHistory = state.transactions.map(transaction => {
-		const card = cardsList.find(card => card.id === transaction.cardId);
-		return card ? Object.assign({}, transaction, { card }) : transaction;
-	});
+		const card = cardsList.find(card => card.id === transaction.cardId)
+		return card ? Object.assign({}, transaction, { card }) : transaction
+	})
 
 	return {
 		cardHistory: cardHistory.filter(data => data.cardId === state.rootCardId)
-	};
-};
+	}
+}
 
 export default connect(
 	mapStateToProps
-)(History);
+)(History)

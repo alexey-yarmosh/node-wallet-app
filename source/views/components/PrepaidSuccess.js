@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'react-emotion';
-import PropTypes from 'prop-types';
+import React from 'react'
+import styled from 'react-emotion'
+import PropTypes from 'prop-types'
 
-import { Island, Title } from './';
+import { Island, Title } from './'
 
 const PrepaidLayout = styled(Island)`
 	width: 350px;
@@ -11,7 +11,7 @@ const PrepaidLayout = styled(Island)`
 	background-color: #353536;
 	position: relative;
 	color: #fff;
-`;
+`
 
 const CheckIcom = styled.div`
 	width: 48px;
@@ -20,30 +20,30 @@ const CheckIcom = styled.div`
 	position: absolute;
 	top: 14;
 	right: 20;
-`;
+`
 
 const Header = styled(Title)`
 	color: #fff;
-`;
+`
 
 const SectionGroup = styled.div`
 	margin-bottom: 20px;
-`;
+`
 
 const Section = styled.div`
 	margin-bottom: 20px;
 	width: 100%;
-`;
+`
 
 const SectionLabel = styled.div`
 	font-size: 13px;
 	text-align: left;
-`;
+`
 
 const SectionValue = styled.div`
 	font-size: 13px;
 	letter-spacing: 0.6px;
-`;
+`
 
 const RepeatPayment = styled.button`
 	font-size: 13px;
@@ -59,10 +59,10 @@ const RepeatPayment = styled.button`
 	bottom: 0;
 	cursor: pointer;
 	text-transform: uppercase;
-`;
+`
 
 const PrepaidSuccess = ({ transaction, repeatPayment }) => {
-	const { sum, id } = transaction;
+	const { sum, id } = transaction
 
 	return (
 		<PrepaidLayout>
@@ -84,8 +84,8 @@ const PrepaidSuccess = ({ transaction, repeatPayment }) => {
 			</SectionGroup>
 			<RepeatPayment onClick={repeatPayment}>Отправить еще один перевод</RepeatPayment>
 		</PrepaidLayout>
-	);
-};
+	)
+}
 
 PrepaidSuccess.propTypes = {
 	transaction: PropTypes.shape({
@@ -99,6 +99,6 @@ PrepaidSuccess.propTypes = {
 		])
 	}),
 	repeatPayment: PropTypes.func.isRequired
-};
+}
 
-export default PrepaidSuccess;
+export default PrepaidSuccess

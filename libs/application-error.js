@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
 class ApplicationError extends Error {
   constructor(message, status) {
-    super(message);
-    this._status = status;
+    super(message)
+    this._status = status
   }
 
   /**
@@ -11,8 +11,8 @@ class ApplicationError extends Error {
    * @returns {*}
    */
   get status() {
-    return this._status;
+    return this._status
   }
 }
 
-module.exports = ApplicationError;
+module.exports = ApplicationError

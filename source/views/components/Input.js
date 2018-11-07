@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
 
 const StyledInput = styled.input`
 	display: inline-block;
@@ -13,15 +13,15 @@ const StyledInput = styled.input`
 	font-size: 15px;
 	line-height: 1.5;
 	color: ${({ textColor }) => textColor || '#fff'};
-`;
+`
 
 const Input = props => (
 	<StyledInput textColor={props.textColor} className={props.className} {...props} />
-);
+)
 
 Input.propTypes = {
 	textColor: PropTypes.string,
 	className: PropTypes.string
-};
+}
 
-export default Input;
+export default Input

@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
 
 const IslandLayout = styled.div`
 	margin: 15px;
@@ -8,17 +8,17 @@ const IslandLayout = styled.div`
 	border-radius: 4px;
 	background: #fff;
 	box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
-`;
+`
 
 const Island = ({ children, className }) => (
 	<IslandLayout className={className}>
 		{children}
 	</IslandLayout>
-);
+)
 
 Island.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string
-};
+}
 
-export default Island;
+export default Island

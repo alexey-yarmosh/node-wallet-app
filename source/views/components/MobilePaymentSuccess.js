@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'react-emotion';
-import PropTypes from 'prop-types';
+import React from 'react'
+import styled from 'react-emotion'
+import PropTypes from 'prop-types'
 
-import { Island } from './';
+import { Island } from './'
 
 const MobilePaymentLayout = styled(Island)`
 	width: 440px;
 	background: #108051;
 	position: relative;
 	color: #fff;
-`;
+`
 
 const SuccessIcon = styled.div`
 	width: 48px;
@@ -18,42 +18,42 @@ const SuccessIcon = styled.div`
 	position: absolute;
 	top: 27;
 	right: 32;
-`;
+`
 
 const Header = styled.div`
 	font-size: 24px;
-`;
+`
 
 const Sum = styled.div`
 	font-size: 48px;
-`;
+`
 
 const CommissionTips = styled.div`
 	font-size: 13px;
 	opacity: 0.6;
 	margin-bottom: 20px;
-`;
+`
 
 const Section = styled.div`
 	position: relative;
 	padding-left: 160px;
 	margin-bottom: 20px;
-`;
+`
 
 const SectionLabel = styled.div`
 	font-size: 15px;
 	position: absolute;
 	left: 0px;
-`;
+`
 
 const SectionValue = styled.div`
 	font-size: 15px;
-`;
+`
 
 const Instruction = styled.div`
 	margin-bottom: 40px;
 	font-size: 15px;
-`;
+`
 
 const RepeatPayment = styled.button`
 	font-size: 13px;
@@ -69,10 +69,10 @@ const RepeatPayment = styled.button`
 	bottom: 0;
 	cursor: pointer;
 	text-transform: uppercase;
-`;
+`
 
 const MobilePaymentSuccess = ({ transaction, repeatPayment }) => {
-	const { sum, phoneNumber, commission } = transaction;
+	const { sum, phoneNumber, commission } = transaction
 
 	return (
 		<MobilePaymentLayout>
@@ -93,8 +93,8 @@ const MobilePaymentSuccess = ({ transaction, repeatPayment }) => {
 			</Instruction>
 			<RepeatPayment onClick={repeatPayment}>Отправить еще один перевод</RepeatPayment>
 		</MobilePaymentLayout>
-	);
-};
+	)
+}
 
 MobilePaymentSuccess.propTypes = {
 	transaction: PropTypes.shape({
@@ -103,6 +103,6 @@ MobilePaymentSuccess.propTypes = {
 		commission: PropTypes.number
 	}).isRequired,
 	repeatPayment: PropTypes.func.isRequired
-};
+}
 
-export default MobilePaymentSuccess;
+export default MobilePaymentSuccess

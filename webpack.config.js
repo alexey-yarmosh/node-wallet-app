@@ -1,15 +1,15 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const fs = require('fs');
+const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const fs = require('fs')
 
 function getExternals() {
   return fs.readdirSync('node_modules')
     .concat(['react-dom/server'])
     .filter(module => module !== '.bin')
     .reduce((externals, module) => {
-      externals[module] = `commonjs ${module}`;
-      return externals;
-    }, {});
+      externals[module] = `commonjs ${module}`
+      return externals
+    }, {})
 }
 
 module.exports = [
@@ -80,4 +80,4 @@ module.exports = [
       ]
     }
   }
-];
+]

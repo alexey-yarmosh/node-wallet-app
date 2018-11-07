@@ -1,1 +1,1 @@
-exports.COMISSION = 3;
+exports.COMISSION = 3
