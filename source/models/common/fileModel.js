@@ -1,7 +1,7 @@
 const ApplicationError = require('libs/application-error')
 const path = require('path')
 const fs = require('fs')
-const Model = require('./Model')
+const Model = require('./model')
 
 class FileModel extends Model {
   constructor(fileName) {

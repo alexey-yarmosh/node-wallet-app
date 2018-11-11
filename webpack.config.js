@@ -16,7 +16,7 @@ module.exports = [
   {
     name: 'client',
     devtool: 'eval',
-    watch: true,
+    watch: false,
     entry: {
       main: ['babel-polyfill', './source/views/index.client.js']
     },
@@ -61,7 +61,7 @@ module.exports = [
   {
     name: 'server',
     devtool: 'eval',
-    watch: true,
+    watch: false,
     entry: './source/views/index.server.js',
     output: {
       path: path.resolve(__dirname, 'source/views'),

@@ -18,6 +18,7 @@ const card2CardPayController = require('./controllers/actions/card2CardPay')
 const CardsModel = require('./models/cards')
 const TransactionsModel = require('./models/transactions')
 
+const { PORT } = process.env
 const app = new Koa()
 
 function getView(viewId) {
@@ -78,6 +79,8 @@ app.use(bodyParser)
 app.use(router.routes())
 app.use(serve('./public'))
 
-app.listen(3000, () => {
-	logger.log('info', 'Application started on 3000')
+const port = !!PORT ? PORT : 8000
+
+app.listen(port || 8000, () => {
+	logger.log('info', `Application started on ${port}`)
 })
